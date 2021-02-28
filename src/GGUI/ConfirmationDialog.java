@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AreYouSureDialog extends JDialog implements ActionListener {
+public class ConfirmationDialog extends JDialog implements ActionListener {
     private boolean okBool;
     private String verb, item;
     private JLabel areYouSureLabel;
     private JButton okBtn, cancelBtn;
 
-    public AreYouSureDialog(String P_verbStr, String P_itemStr)
+    public ConfirmationDialog(String P_verbStr, String P_itemStr)
     {
 
         okBool = false;

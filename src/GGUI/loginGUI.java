@@ -48,7 +48,7 @@ public class loginGUI extends JFrame implements ActionListener {
             loginButton.removeActionListener(this);
 
             dispose();
-            new defaultPage();
+            new DefaultFrame();
 
         }
     }

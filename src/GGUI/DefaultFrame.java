@@ -2,19 +2,19 @@ package GGUI;
 
 import javax.swing.*;
 
-public class defaultPage  extends JFrame {
+public class DefaultFrame extends JFrame {
         private JPanel recepPanel;
         private JPanel formPanel;
         private JTabbedPane tabbedPane;
 
    private JTabbedPane ingredientsTab;
 
-    public defaultPage()
+    public DefaultFrame()
     {
         tabbedPane = new JTabbedPane();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         recepPanel = new JPanel();
-        tabbedPane.add("Ingredients", new ingrePanel());
+        tabbedPane.add("Ingredients", new IngrediantPanel());
         tabbedPane.add("Recipes", recepPanel);
         tabbedPane.add("Form", formPanel);
 

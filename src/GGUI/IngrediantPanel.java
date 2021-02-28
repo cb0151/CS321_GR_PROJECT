@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ingrePanel extends JPanel implements ActionListener {
+public class IngrediantPanel extends JPanel implements ActionListener {
 
     private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
@@ -15,7 +15,7 @@ public class ingrePanel extends JPanel implements ActionListener {
     private JButton ingreRemoveB;
     private JButton ingreListAllB;
 
-    public ingrePanel(){
+    public IngrediantPanel(){
 
 
         buildIngrePanel();
