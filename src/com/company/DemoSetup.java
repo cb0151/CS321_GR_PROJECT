@@ -7,6 +7,7 @@ public class DemoSetup {
     FileManager FileManager = new FileManager("DataSource/ingredients.json");
     IngredientFactory testFactory = new IngredientFactory();
     IngredientDictionary ingredientDictionary;
+
     public DemoSetup(){
 
         this.createDictionary();
