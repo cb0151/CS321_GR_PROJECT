@@ -1,4 +1,4 @@
-package GUI;
+package GGUI;
 
 public class AccessControl {
 String actUN;
