@@ -6,7 +6,47 @@ import java.util.ListIterator;
 
 public class IngredientDictionary {
 
-    LinkedList<IngredientItem> ingredientItemLinkedList;
+    private LinkedList<IngredientItem> ingredientItemLinkedList;
+    private static  IngredientDictionary instance = null;
+
+    /**
+     * Gets instance the single instance of IngredientFact
+     */
+    public static IngredientDictionary getIngredientDictionary()
+    {
+        if(instance == null)
+        {
+
+            instance = new IngredientDictionary();
+        }
+
+        return instance;
+
+    }
+    private IngredientDictionary()
+    {
+        this.ingredientItemLinkedList = new LinkedList<>();
+        for(int i = 0; i < ingredientItemLinkedList.size(); i++){
+
+            this.ingredientItemLinkedList.add(ingredientItemLinkedList.get(i));
+
+        }
+
+    }
+
+    /**
+     * Creates the Linked list for the Singleton
+     * @param ingredientItemLinkedList
+     */
+    public void setIngredientItemLinkedList(LinkedList<IngredientItem> ingredientItemLinkedList){
+        this.ingredientItemLinkedList = new LinkedList<>();
+        for(int i = 0; i < ingredientItemLinkedList.size(); i++){
+
+            this.ingredientItemLinkedList.add(ingredientItemLinkedList.get(i));
+
+        }
+    }
+
 
     /**
      * Constructor to Create a Clone of the Ingredient Item Linked List
@@ -47,6 +87,24 @@ public class IngredientDictionary {
     }
 
     /**
+     * Method to check if an Ingredient Name Already Exists in the Linked List
+     * @param ingredientName
+     * @return  Boolean Value to be returned to verify the operation succeeded.
+     */
+    public boolean ingredientNameCheck(String ingredientName){
+        boolean isIngredient = false;
+        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
+            if(this.ingredientItemLinkedList.get(i).getName().equals(ingredientName)){
+
+                isIngredient = true;
+            }
+        }
+
+
+        return isIngredient;
+    }
+
+    /**
      * Method to check if an Ingredient Already Exists in the Linked List
      * @param ingredientItem
      * @return  Boolean Value to be returned to verify the operation succeeded.
@@ -70,6 +128,7 @@ public class IngredientDictionary {
      * @param ingredientItem    The ingredient Item to be added.
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
+
     public boolean addIngredientToList(IngredientItem ingredientItem){
         boolean alreadyExists = ingredientCheck(ingredientItem);
 

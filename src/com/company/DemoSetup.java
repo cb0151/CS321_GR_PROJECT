@@ -25,8 +25,15 @@ public class DemoSetup {
             e.printStackTrace();
         }
         FileManager.createObjectArray();
+
+        //TODO - I getting the instance of the singleton of IngredientDictionary.
+        IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
+
         testFactory.startFactory(FileManager.getObjectArrayList());
         ingredientDictionary = new IngredientDictionary(testFactory.getList());
+        //TODO Jonathan
+        ID.setIngredientItemLinkedList(testFactory.getList());
+
         try {
             FileManager.close();
         } catch (IOException e) {

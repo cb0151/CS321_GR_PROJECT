@@ -1,5 +1,7 @@
 package GGUI;
 
+import com.company.IngredientDictionary;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private JButton ingreUpdateB;
     private JButton ingreRemoveB;
     private JButton ingreListAllB;
+
 
     public IngrediantPanel(){
 
