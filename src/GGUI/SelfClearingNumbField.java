@@ -6,7 +6,8 @@ import java.awt.event.KeyListener;
 public class SelfClearingNumbField extends SelfClearingTextField implements KeyListener {
     private int countPoint;
 
-    String last;
+    private String last;
+
 
 
     public SelfClearingNumbField(String title, int width) {
@@ -14,15 +15,19 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
         last = "";
         countPoint = 0;
         addKeyListener(this);
+
     }
-
-
+    public double getValue(){
+        double value;
+        value = Double.parseDouble(getText());
+        return value;
+    }
 
 
     @Override
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
-
+        String selected = getSelectedText();
         if (!((c >= 48) && (c <= 57) ||c == KeyEvent.VK_ENTER|| (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || c == '.'))
         {
             getToolkit().beep();
@@ -33,7 +38,14 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
             getToolkit().beep();
             e.consume();
         }
-        last = getText() + c;
+        if(selected != null){
+            if(selected.contains(".")){
+                last = "";
+            }
+        }
+        else {
+            last = getText() + c;
+        }
 
 
 
