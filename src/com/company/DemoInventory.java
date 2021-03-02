@@ -33,7 +33,7 @@ public class DemoInventory {
 
    public void testInventory(){
         System.out.println("Initialize Inventory");
-        InventoryManager Manager = new InventoryManager(ingredientDictionary);
+        //InventoryManager Manager = new InventoryManager(ingredientDictionary);
         System.out.println("Successfully loaded Inventory");
 
 

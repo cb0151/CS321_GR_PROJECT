@@ -21,7 +21,7 @@ public class InventoryManager {
      * Method to create the Ingredient Dictionary and House within the Inventory Manger for Ease of Access to the GUI
      * Designed for Future Development with Recipes being Managed as well
      */
-    public void createIngredientDictionary(){
+    private void createIngredientDictionary(){
         try {
             FileManager.generateStringArrayList();
         } catch (IOException e) {
@@ -72,31 +72,55 @@ public class InventoryManager {
 
     public IngredientItem searchIngredient(String searchInput){
         IngredientItem SearchResult = IngredientDictionary.getIngredientItem(searchInput);
-        if (SearchResult.equals(null)){
+        if(!SearchResult.equals(null)){
+            return SearchResult;
+        }else {
+            System.out.println("Ingredient Not Found");
+            return null;
+        }   //TODO change to through exception
+
+/*        if (SearchResult.equals(null)){
             System.out.println("Ingredient not found. ");
         }
-        return SearchResult;
+        return SearchResult;*/
     }
 
-    public void addIngredient(){
+    public void addIngredient(IngredientItem addItem){
         //IngredientItem newitem = PromptForInput()
         // Not sure how we are going to implement this just yet, but I imagine we prompt
         //for details and add them as new ingredients to the Dictionary.
 
-        IngredientItem newitem = new IngredientItem();
+        IngredientDictionary.addIngredientToList(addItem);
+
+/*        IngredientItem newitem = new IngredientItem();
         newitem = this.searchIngredient(newitem.getName());
+
         if (!newitem.equals(null)){
             IngredientDictionary.addIngredientToList(newitem);
-        }
+        }*/
     }
 
-    //This function will prompt the user for details about the new ingredient. All attributes will go into the arraylist.
+    //This function will prompt the user for details about the new ingredient.
+    // All attributes will go into the arraylist.
+
+    /*This can be handled through the GUI and it's controller, then it can pass the new ingredient to be added
+    * to the "addIngredient()" method
+    * It would do so by prompting user to enter the relevant data, then store that in a temporary IngredientItem object
+    * That would then be passed to the Inventory Manager's addIngredient() method.
+    */
     public ArrayList<String> PromptForInput(){
-    ArrayList<String> InputStream = new ArrayList<String>();
+        ArrayList<String> InputStream = new ArrayList<String>();
 
-    return InputStream;
+        return InputStream;
     }
-    // I couldn't find a method to create an ingredient from scratch, so I just created one. This can be deleted or moved somewhere else
+
+    // I couldn't find a method to create an ingredient from scratch, so I just created one.
+    // This can be deleted or moved somewhere else
+
+    /*
+    This is done with the IngredientItem Constructor, it can be created multiple ways to be passed around.
+    Best not to have any other class creating an Ingredient Item like this.
+     */
     public IngredientItem createIngredient(ArrayList<String> InputStream){
         //
         IngredientItem newIngredient = new IngredientItem();
@@ -109,12 +133,20 @@ public class InventoryManager {
        // newIngredient.setLastUsedDate(InputStream.get(0)); //create a method to convert string to date
         return newIngredient;
     }
-    public void removeIngredient(String ingredient){
-        IngredientItem newitem = new IngredientItem();
+
+    /**
+     * Method to Remove Specified Ingredient Item
+     * @param removeItem    Ingredient Item to be Removed from the Ingredient Dictionary
+     */
+    public void removeIngredient(IngredientItem removeItem){
+
+        IngredientDictionary.removeIngredientFromList(removeItem);
+
+/*        IngredientItem newitem = new IngredientItem();
         newitem = this.searchIngredient(newitem.getName());
         if (!newitem.equals(null)){
             IngredientDictionary.removeIngredientFromList(newitem);
-        }
+        }*/
     }
 
     public double calculateCost(String ingredient){
@@ -133,14 +165,26 @@ public class InventoryManager {
         return quantity*searchIngredient(ingredient).getCost();
     }
 
-    public IngredientItem getIngredient(IngredientItem ingredient){
-        return ingredient;
+    /**
+     * Method will Retrieve a copy of the Ingredient Item Needed
+     * @param ingredientName    The name of the Ingredient Item to be Retrieved
+     * @return  Returns the requested Ingredient Item
+     * TODO add Exception Handler for when the Ingredient Item Does not
+     */
+    public IngredientItem getIngredient(String ingredientName){
+        return IngredientDictionary.getIngredientItem(ingredientName);
     }
 
+    /**
+     * Method Checks to see an Ingredient Item Exists in the Inventory Dictionary
+     * @param ingredient    The Ingredient Item to be Searched for
+     * @return  Boolean Value based on result
+     */
     public boolean doesIngredientExist(IngredientItem ingredient){
-        return false;
+        return IngredientDictionary.ingredientCheck(ingredient);
     }
 
+    //Need???
     public boolean ingredientHasNext(IngredientItem ingredient){
         return false;
     }

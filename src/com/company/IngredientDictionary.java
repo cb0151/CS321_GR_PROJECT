@@ -59,6 +59,7 @@ public class IngredientDictionary {
                 isIngredient = true;
             }
         }
+        //TODO add exception Handling here
         if(isIngredient == false) System.out.println(ingredientItem.getName() + " :: Error Not Found");
 
         return isIngredient;
