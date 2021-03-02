@@ -8,6 +8,9 @@ public class DemoSetup {
     IngredientFactory testFactory = new IngredientFactory();
     IngredientDictionary ingredientDictionary;
 
+    /*
+    Currently Demos without using the Inventory Manager. This is to showcase that the foundation code works properly
+     */
     public DemoSetup(){
 
         this.createDictionary();
