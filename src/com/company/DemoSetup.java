@@ -41,7 +41,7 @@ public class DemoSetup {
         FileManager.setStringArrayList(ingredientDictionary.convertToStringArrayList());
 
         try {
-            FileManager.generateStringFile();
+            FileManager.generateIngredientJSONFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

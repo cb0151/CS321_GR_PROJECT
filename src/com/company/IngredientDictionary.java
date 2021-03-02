@@ -113,6 +113,7 @@ public class IngredientDictionary {
      */
     public boolean updateIngredientInList(IngredientItem updateItem){
         this.removeIngredientFromList(updateItem);
+        this.ingredientChanges(updateItem);
         this.addIngredientToList(updateItem);
         return true;
     }
@@ -137,6 +138,44 @@ public class IngredientDictionary {
         while(itr.hasNext()){
             System.out.println(itr.next().toJSONString());
         }
+    }
+
+    /**
+     * Method to compare 2 Ingredient Items to see if the original had any changes made before it gets updated
+     * @param ingredientItem    The ingredient item to be updated
+     * @return
+     */
+    private ChangeLogger ingredientChanges(IngredientItem ingredientItem){
+        //TODO remove, inserted to as place holder
+        ChangeLogger changes = new ChangeLogger();
+
+        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
+            if(!this.ingredientItemLinkedList.get(i).getName().equals(ingredientItem.getName())){
+                //TODO Record Changes
+            }
+
+            if(!this.ingredientItemLinkedList.get(i).getType().equals((ingredientItem.getType()))){
+                //TODO Record Changes
+            }
+
+            if(this.ingredientItemLinkedList.get(i).getCost() != ingredientItem.getCost()){
+                //TODO Record Changes
+            }
+
+            if(this.ingredientItemLinkedList.get(i).getWeight() != ingredientItem.getWeight()){
+                //TODO Record Changes
+            }
+
+            if(!this.ingredientItemLinkedList.get(i).getMeasurementUnit().equals((ingredientItem.getMeasurementUnit()))){
+                //TODO Record Changes
+            }
+
+            if(this.ingredientItemLinkedList.get(i).getQuantityOnHand() != ingredientItem.getQuantityOnHand()){
+                //TODO Record Changes
+            }
+        }
+
+        return changes;
     }
 }
 

@@ -60,6 +60,14 @@ public class InventoryManager {
     }
 
     public double calculateCost(String ingredient){
+        /*TODO
+        *This I think would be the following formula
+        *Beginning Inventory (at the beginning of the year)
+        *Plus Purchases and Other Costs
+        *Minus Ending Inventory (at the end of the year)
+        *Equals Cost of Goods Sold.
+
+         */
     //Do we prompt for quantity of item in question we are trying to calculate?
 
         double quantity = 0.5;
