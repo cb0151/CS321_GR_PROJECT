@@ -3,58 +3,49 @@
   <ID>JAVA</ID>
   <OriginalElement>com.company</OriginalElement>
   <nodes>
-    <node x="486.49999999999994" y="1155.0">com.company.InventoryManager</node>
-    <node x="332.99999999999994" y="742.5">com.company.IngredientFactory</node>
-    <node x="0.0" y="500.0">com.company.FileManager</node>
-    <node x="652.9999999999999" y="665.5">com.company.IngredientDictionary</node>
-    <node x="1050.5" y="0.0">com.company.Main</node>
-    <node x="621.4285714285713" y="0.0">com.company.IngredientItem</node>
+    <node x="-38.5" y="658.0">com.company.InventoryManager</node>
+    <node x="370.0" y="2030.0">com.company.IngredientFactory</node>
+    <node x="323.5" y="-12.5">com.company.FileManager</node>
+    <node x="1162.0" y="1113.0">com.company.IngredientDictionary</node>
+    <node x="773.0" y="1505.0">com.company.IngredientItem</node>
   </nodes>
   <notes />
   <edges>
     <edge source="com.company.InventoryManager" target="com.company.IngredientItem">
-      <point x="138.6875" y="-182.0" />
-      <point x="783.6875" y="1135.0" />
-      <point x="990.5" y="1135.0" />
-      <point x="990.5" y="460.0" />
-      <point x="897.0535714285713" y="460.0" />
-      <point x="128.625" y="215.0" />
+      <point x="158.5" y="120.0" />
+      <point x="520.0" y="960.0" />
+      <point x="520.0" y="1680.0" />
+      <point x="-147.0" y="-40.0" />
     </edge>
     <edge source="com.company.IngredientDictionary" target="com.company.IngredientItem">
-      <point x="-105.33333333333331" y="-127.0" />
-      <point x="705.6666666666666" y="480.0" />
-      <point x="750.0535714285713" y="480.0" />
-      <point x="-18.375" y="215.0" />
+      <point x="-158.0" y="-0.0" />
+      <point x="920.0" y="1240.0" />
+      <point x="0.0" y="-215.0" />
     </edge>
     <edge source="com.company.IngredientFactory" target="com.company.IngredientItem">
-      <point x="-100.0" y="-50.0" />
-      <point x="382.99999999999994" y="450.0" />
-      <point x="639.8035714285713" y="450.0" />
-      <point x="-128.625" y="215.0" />
+      <point x="150.0" y="-40.0" />
+      <point x="720.0" y="2040.0" />
+      <point x="720.0" y="1760.0" />
+      <point x="-147.0" y="40.0" />
     </edge>
     <edge source="com.company.InventoryManager" target="com.company.FileManager">
-      <point x="-138.6875" y="-182.0" />
-      <point x="506.31249999999994" y="1135.0" />
-      <point x="78.25" y="1135.0" />
-      <point x="-78.25" y="292.5" />
-    </edge>
-    <edge source="com.company.InventoryManager" target="com.company.IngredientDictionary">
-      <point x="19.8125" y="-182.0" />
-      <point x="664.8125" y="1105.0" />
-      <point x="731.9999999999999" y="1105.0" />
-      <point x="-79.0" y="127.0" />
+      <point x="158.5" y="-40.0" />
+      <point x="480.0" y="800.0" />
+      <point x="0.0" y="292.5" />
     </edge>
     <edge source="com.company.InventoryManager" target="com.company.IngredientFactory">
-      <point x="-59.4375" y="-182.0" />
-      <point x="585.5625" y="1115.0" />
-      <point x="407.99999999999994" y="1115.0" />
-      <point x="-75.0" y="50.0" />
+      <point x="158.5" y="160.0" />
+      <point x="480.0" y="1000.0" />
+      <point x="-40.0" y="-50.0" />
+    </edge>
+    <edge source="com.company.InventoryManager" target="com.company.IngredientDictionary">
+      <point x="158.5" y="40.0" />
+      <point x="1320.0" y="880.0" />
+      <point x="0.0" y="-127.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.3754087638979725" x="587.5" y="754.5" />
-  <SelectedNodes>
-    <node>com.company.IngredientFactory</node>
-  </SelectedNodes>
+  <settings layout="Directed Orthogonal" zoom="0.30000000000000004" x="-346.07665505226487" y="1045.3275261324043" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>

@@ -11,38 +11,17 @@
     <node x="234.5" y="0.0">GGUI.AddDialog</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="GGUI.loginGUI" target="GGUI.AccessControl">
-      <point x="-78.66666666666669" y="-149.0" />
-      <point x="96.08333333333331" y="843.0" />
-      <point x="58.25" y="843.0" />
-      <point x="-58.25" y="94.0" />
-    </edge>
-    <edge source="GGUI.loginGUI" target="GGUI.DefaultFrame">
-      <point x="78.66666666666669" y="-149.0" />
-      <point x="253.41666666666669" y="843.0" />
-      <point x="352.5" y="843.0" />
-      <point x="0.0" y="71.5" />
-    </edge>
-    <edge source="GGUI.IngrediantPanel" target="GGUI.AddDialog">
-      <point x="0.0" y="-138.0" />
-      <point x="0.0" y="127.0" />
-    </edge>
-    <edge source="GGUI.DefaultFrame" target="GGUI.IngrediantPanel">
-      <point x="0.0" y="-71.5" />
-      <point x="0.0" y="138.0" />
-    </edge>
-  </edges>
+  <edges />
   <settings layout="Hierarchic Group" zoom="0.4839797639123103" x="376.0" y="583.0" />
   <SelectedNodes>
     <node>GGUI.ConfirmationDialog</node>
   </SelectedNodes>
   <Categories>
-    <Category>Inner Classes</Category>
-    <Category>Properties</Category>
-    <Category>Methods</Category>
-    <Category>Constructors</Category>
     <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
