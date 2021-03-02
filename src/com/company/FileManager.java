@@ -34,10 +34,10 @@ public class FileManager extends Reader {
     }
 
     /**
-     * Method to Generate a String File using the formatted String Array List
+     * Method to Generate a JSON File using the formatted String Array List for Ingredients
      * @throws IOException
      */
-    public void generateStringFile() throws IOException {
+    public void generateIngredientJSONFile() throws IOException {
         this.openFileWriter();
 
         this.writer.write("{\n" +
@@ -62,6 +62,38 @@ public class FileManager extends Reader {
         }
         this.closeFileWriter();
     }
+
+    /**
+     * Method to Generate a JSON File using the formatted String Array List For Recipes
+     * @throws IOException
+     */
+    public void generateRecipesJSONFile() throws IOException {
+        this.openFileWriter();
+
+        this.writer.write("{\n" +
+                "\"Recipes\":\n" +
+                "\n" +
+                "[\n");
+
+        for(int i = 0; i < this.stringArrayList.size(); i++){
+            //System.out.println("Adding Ingredient to Txt File Next");
+            this.writer.write(this.stringArrayList.get(i).toString());
+
+            if(i != this.stringArrayList.size() - 1){
+                this.writer.write(",\n");
+            }else{
+                this.writer.write("\n" +
+                        "\n" +
+                        "\n" +
+                        "]\n" +
+                        "}");
+            }
+            //System.out.println("Just added " + this.stringArrayList.get(i).toString());
+        }
+        this.closeFileWriter();
+    }
+
+
 
     //METHODS TO OPEN AND CLOSE FILE READER,WRITER, AND BUFFERED READER
 
@@ -234,6 +266,7 @@ public class FileManager extends Reader {
             this.stringArrayList.add(stringArrayList.get(i));
         }
     }
+
 
     /**
      * Method to Get the Object Array List.

@@ -8,6 +8,9 @@ public class DemoSetup {
     IngredientFactory testFactory = new IngredientFactory();
     IngredientDictionary ingredientDictionary;
 
+    /*
+    Currently Demos without using the Inventory Manager. This is to showcase that the foundation code works properly
+     */
     public DemoSetup(){
 
         this.createDictionary();
@@ -48,7 +51,7 @@ public class DemoSetup {
         FileManager.setStringArrayList(ingredientDictionary.convertToStringArrayList());
 
         try {
-            FileManager.generateStringFile();
+            FileManager.generateIngredientJSONFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

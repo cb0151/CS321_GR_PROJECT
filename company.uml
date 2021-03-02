@@ -3,64 +3,49 @@
   <ID>JAVA</ID>
   <OriginalElement>com.company</OriginalElement>
   <nodes>
-    <node x="0.0" y="798.0">com.company.IngredientFactory</node>
-    <node x="489.375" y="1188.0">com.company.testing</node>
-    <node x="667.0" y="578.0">com.company.FileManager</node>
-    <node x="320.0" y="721.0">com.company.IngredientDictionary</node>
-    <node x="526.375" y="1403.0">com.company.Main</node>
-    <node x="244.6875" y="0.0">com.company.IngredientItem</node>
+    <node x="-38.5" y="658.0">com.company.InventoryManager</node>
+    <node x="370.0" y="2030.0">com.company.IngredientFactory</node>
+    <node x="323.5" y="-12.5">com.company.FileManager</node>
+    <node x="1162.0" y="1113.0">com.company.IngredientDictionary</node>
+    <node x="773.0" y="1505.0">com.company.IngredientItem</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="com.company.testing" target="com.company.IngredientFactory">
-      <point x="-97.5625" y="-82.5" />
-      <point x="503.3125" y="1168.0" />
-      <point x="75.0" y="1168.0" />
-      <point x="-75.0" y="50.0" />
-    </edge>
-    <edge source="com.company.testing" target="com.company.IngredientItem">
-      <point x="41.8125" y="-82.5" />
-      <point x="642.6875" y="1168.0" />
-      <point x="656.5" y="1168.0" />
-      <point x="656.5" y="538.0" />
-      <point x="593.4375" y="538.0" />
-      <point x="162.75" y="259.0" />
+    <edge source="com.company.InventoryManager" target="com.company.IngredientItem">
+      <point x="158.5" y="120.0" />
+      <point x="520.0" y="960.0" />
+      <point x="520.0" y="1680.0" />
+      <point x="-147.0" y="-40.0" />
     </edge>
     <edge source="com.company.IngredientDictionary" target="com.company.IngredientItem">
-      <point x="-105.0" y="-127.0" />
-      <point x="372.5" y="558.0" />
-      <point x="407.4375" y="558.0" />
-      <point x="-23.25" y="259.0" />
+      <point x="-158.0" y="-0.0" />
+      <point x="920.0" y="1240.0" />
+      <point x="0.0" y="-215.0" />
     </edge>
     <edge source="com.company.IngredientFactory" target="com.company.IngredientItem">
-      <point x="-100.0" y="-50.0" />
-      <point x="50.0" y="538.0" />
-      <point x="267.9375" y="538.0" />
-      <point x="-162.75" y="259.0" />
+      <point x="150.0" y="-40.0" />
+      <point x="720.0" y="2040.0" />
+      <point x="720.0" y="1760.0" />
+      <point x="-147.0" y="40.0" />
     </edge>
-    <edge source="com.company.testing" target="com.company.IngredientDictionary">
-      <point x="-41.8125" y="-82.5" />
-      <point x="559.0625" y="1148.0" />
-      <point x="398.75" y="1148.0" />
-      <point x="-78.75" y="127.0" />
+    <edge source="com.company.InventoryManager" target="com.company.FileManager">
+      <point x="158.5" y="-40.0" />
+      <point x="480.0" y="800.0" />
+      <point x="0.0" y="292.5" />
     </edge>
-    <edge source="com.company.Main" target="com.company.testing">
-      <point x="-37.25" y="-27.0" />
-      <point x="563.625" y="1378.0" />
-      <point x="545.125" y="1378.0" />
-      <point x="-55.75" y="82.5" />
+    <edge source="com.company.InventoryManager" target="com.company.IngredientFactory">
+      <point x="158.5" y="160.0" />
+      <point x="480.0" y="1000.0" />
+      <point x="-40.0" y="-50.0" />
     </edge>
-    <edge source="com.company.testing" target="com.company.FileManager">
-      <point x="69.6875" y="-82.5" />
-      <point x="670.5625" y="1158.0" />
-      <point x="745.25" y="1158.0" />
-      <point x="-78.25" y="270.0" />
+    <edge source="com.company.InventoryManager" target="com.company.IngredientDictionary">
+      <point x="158.5" y="40.0" />
+      <point x="1320.0" y="880.0" />
+      <point x="0.0" y="-127.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.9886255924170615" x="490.00000000000006" y="744.7721954576739" />
-  <SelectedNodes>
-    <node>com.company.IngredientFactory</node>
-  </SelectedNodes>
+  <settings layout="Directed Orthogonal" zoom="0.30000000000000004" x="-346.07665505226487" y="1045.3275261324043" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
