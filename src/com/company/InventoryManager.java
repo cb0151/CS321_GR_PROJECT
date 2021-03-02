@@ -1,20 +1,77 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 //This is a very early version of Inventory that I made just to test how some functionalities will be implemented. Adding exception checks and covering all use cases soon.
 public class InventoryManager {
-    IngredientDictionary SourceDict; //Copy instance of IngredientDictionary here to load inventory
+    IngredientDictionary IngredientDictionary; //Copy instance of IngredientDictionary here to load inventory
 
+    FileManager FileManager;
+    IngredientFactory IngredientFactory;
 
-    public InventoryManager(IngredientDictionary Ing_Dictionary){
-        SourceDict = Ing_Dictionary;
+    public InventoryManager(){
+        //TODO make so that it takes in a file name here for either Initial Setup or Demo Setup
+        FileManager = new FileManager("DataSource/ingredients.json");
+        IngredientFactory = new IngredientFactory();
+        createIngredientDictionary();
+    }
+
+    /**
+     * Method to create the Ingredient Dictionary and House within the Inventory Manger for Ease of Access to the GUI
+     * Designed for Future Development with Recipes being Managed as well
+     */
+    public void createIngredientDictionary(){
+        try {
+            FileManager.generateStringArrayList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        FileManager.createObjectArray();
+        IngredientFactory.startFactory(FileManager.getObjectArrayList());
+        IngredientDictionary = new IngredientDictionary(IngredientFactory.getList());
+        try {
+            FileManager.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileManager.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to Generate/Create the JSON file for Ingredients before closing of program
+     */
+    public void createIngredientFileWriter(){
+        FileManager = new FileManager();
+        //TODO Update to reflect a file name being passed in, either from initial setup or from a demo setup
+        FileManager.setFileName("DataSource/Ingredients.json");
+        FileManager.setStringArrayList(IngredientDictionary.convertToStringArrayList());
+
+        try {
+            FileManager.generateIngredientJSONFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileManager.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    public IngredientItem searchIngredient(String input){
-        IngredientItem SearchResult = SourceDict.getIngredientItem(input);
+
+
+
+
+    public IngredientItem searchIngredient(String searchInput){
+        IngredientItem SearchResult = IngredientDictionary.getIngredientItem(searchInput);
         if (SearchResult.equals(null)){
             System.out.println("Ingredient not found. ");
         }
@@ -22,13 +79,14 @@ public class InventoryManager {
     }
 
     public void addIngredient(){
-        //IngredientItem newitem = PromptForInput()  //Not sure how we are going to implement this just yet, but I imagine we prompt
+        //IngredientItem newitem = PromptForInput()
+        // Not sure how we are going to implement this just yet, but I imagine we prompt
         //for details and add them as new ingredients to the Dictionary.
 
         IngredientItem newitem = new IngredientItem();
         newitem = this.searchIngredient(newitem.getName());
         if (!newitem.equals(null)){
-            SourceDict.addIngredientToList(newitem);
+            IngredientDictionary.addIngredientToList(newitem);
         }
     }
 
@@ -55,7 +113,7 @@ public class InventoryManager {
         IngredientItem newitem = new IngredientItem();
         newitem = this.searchIngredient(newitem.getName());
         if (!newitem.equals(null)){
-            SourceDict.removeIngredientFromList(newitem);
+            IngredientDictionary.removeIngredientFromList(newitem);
         }
     }
 
