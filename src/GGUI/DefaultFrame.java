@@ -9,6 +9,9 @@ public class DefaultFrame extends JFrame {
 
    private JTabbedPane ingredientsTab;
 
+    /**
+     *  Builds the frame adds the tabs. At the moment IngrediantPanel is the only operational frame.
+     */
     public DefaultFrame()
     {
         tabbedPane = new JTabbedPane();

@@ -21,14 +21,18 @@ private ArrayList<SelfClearingTextField> listTextFields;
  private String getUnit;
  private String[] unitArray = new String[4];
 
-    public  AddDialog(){
+    public  AddDialog(JPanel panel){
         setTitle("Add Item");
         ID = IngredientDictionary.getIngredientDictionary();
         setLayout(new GridBagLayout());
+        JDialog j = new JDialog();
+
         buildDialog();
         setSize(300,300);
-        setResizable(false);
+        pack();
+        //setResizable(true);
         setVisible(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     private void buildDialog()
     {
@@ -47,7 +51,7 @@ private ArrayList<SelfClearingTextField> listTextFields;
 
         oKB = new JButton("Ok");
         oKB.addActionListener(this);
-        unitArray = new String[]{"lb", "oz", "L", "ml"};
+        unitArray = new String[]{"lb", "oz", "L", "mL"};
         getUnit = unitArray[0];
         unitDropDownBox = new JComboBox(unitArray);
         unitDropDownBox.addActionListener(this);
@@ -90,6 +94,10 @@ private ArrayList<SelfClearingTextField> listTextFields;
 
     }
 
+    /**
+     * This checks if all the text fields are nonblank.
+     * @return
+     */
     private boolean allFilled(){
         boolean all = true;
         for(int i = 0; i <listTextFields.size(); i++){
@@ -101,6 +109,10 @@ private ArrayList<SelfClearingTextField> listTextFields;
         return all;
     }
 
+    /**
+     * This method resets all the blank/nonclicked-on text field to default message.
+     * I might need to move this to an utility method so other frames can use this.
+     */
     private void resetList(){
 
         for(int i = 0; i <listTextFields.size(); i++){

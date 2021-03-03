@@ -1,10 +1,14 @@
 package GGUI;
 
 import com.company.IngredientDictionary;
+import com.company.IngredientItem;
 
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class IngrediantPanel extends JPanel implements ActionListener {
 
@@ -16,17 +20,54 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private JButton ingreUpdateB;
     private JButton ingreRemoveB;
     private JButton ingreListAllB;
-
-
+    private JTable ingredientTable;
+    private JScrollPane tablePane;
+    IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
+    LinkedList<IngredientItem> IL;
     public IngrediantPanel(){
 
+        tablePane = new JScrollPane();
 
         buildIngrePanel();
+        buildIngredientTable();
+
+    }
+    private void buildIngredientTable(){
+
+        IL=ID.getIngredientItemLinkedList();
+        String[][] data;
+        int n = IL.size();
+        data = new String[n][2];
+        String[] header = new String[] {"ingredient", "Amount on hand"};
+
+        for(int r = 0; r < n; r++) {
+           data[r][0] = IL.get(r).getName();
+           data[r][1] = String.valueOf(IL.get(r).getWeight()) + " " + IL.get(r).getMeasurementUnit();
+
+
+        }
+
+        ingredientTable = new JTable(data,header);
+        ingredientTable.setRowSelectionAllowed(true);
+
+        ingredientTable.setPreferredScrollableViewportSize(new Dimension(500, 50));
+        ingredientTable.setDragEnabled(false);
+        ingredientTable.setDefaultEditor(Object.class, null);
+
+        TableColumnModel columnModel = ingredientTable.getColumnModel();
+        columnModel.getColumn(1).setWidth(500);
+
+
+        add(ingredientTable);
+
 
     }
 
-
-private void buildIngrePanel(){
+    /**
+     * The following method just adds the buttons to the toolbar and the toolbar to the panel
+     * It also adds the listeners to the buttons.
+     */
+    private void buildIngrePanel(){
 
 
     ingreToolBar =new JToolBar();
@@ -54,7 +95,7 @@ private void buildIngrePanel(){
         ingreToolBar.add(ingreListAllB);
     }
 
-    //add the listener to the  Buttons
+    // The following code adds the listener to the  Buttons.
     {
 
         ingreSearchB.addActionListener(this);
@@ -75,7 +116,10 @@ private void buildIngrePanel(){
 
 }
 
-
+    /**
+     * The actionPerformed method determines what button you pressed and performs a certain action via a series of if-else statements
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == ingreSearchB) {
@@ -83,7 +127,9 @@ private void buildIngrePanel(){
         }
         else if(e.getSource() == ingreAddB)
         {
-            new AddDialog();
+
+            new AddDialog(this);
+
             System.out.println("Add");
         }
         else if(e.getSource() == ingreUpdateB)

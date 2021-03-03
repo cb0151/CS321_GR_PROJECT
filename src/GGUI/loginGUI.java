@@ -14,7 +14,7 @@ public class loginGUI extends JFrame implements ActionListener {
     private JButton loginButton;
     private JLabel invalidLabel;
     private String inPW, inUN;
-    private AccessControl ac = AccessControl.getAccessInstance();
+    private AccessControl ac = new AccessControl();
 
     public loginGUI() {
         loginPanel = new JPanel(new GridLayout(3, 1));

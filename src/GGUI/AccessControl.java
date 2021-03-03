@@ -5,7 +5,7 @@ String actUN;
 String actPW = "password123";
 private boolean loggedIn;
 private static AccessControl AccessInstance = null;
-private AccessControl(){
+public AccessControl(){
     actUN = "jlew92";
     actPW = "password123";
 }
