@@ -10,8 +10,12 @@ public class SelfClearingTextField extends JTextField implements MouseListener {
     private String defaultText;
     public SelfClearingTextField(String title, int width){
         setText(title);
+
+        setMinimumSize(new Dimension(width,30));
+
         defaultText = title;
         setSize(width, 30);
+
         addMouseListener(this);
         beenClicked = false;
         setFont(new Font("New Times Roman" , Font.ITALIC, 12));

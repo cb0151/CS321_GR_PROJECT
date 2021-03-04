@@ -1,6 +1,7 @@
 package GGUI;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class DefaultFrame extends JFrame {
         private JPanel recepPanel;
