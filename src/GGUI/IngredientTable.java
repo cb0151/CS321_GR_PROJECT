@@ -8,8 +8,12 @@ import java.awt.event.ActionListener;
 public class IngredientTable extends JTable implements ActionListener {
 
     String[] header;
+    String[] data;
     public IngredientTable(){
         header = new String[]{"Ingredient","price","amount on hand"};
+        //data = new String[]{{" c","c ","c "}};
+        //JTable table = new JTable(header, data);
+        getColumnModel().getColumn(0).setMaxWidth(30);
         getRowSelectionAllowed();
 
     }
