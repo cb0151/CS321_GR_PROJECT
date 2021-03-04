@@ -20,10 +20,10 @@ public class DefaultFrame extends JFrame {
         tabbedPane.add("Ingredients", new IngrediantPanel());
         tabbedPane.add("Recipes", recepPanel);
         tabbedPane.add("Form", formPanel);
-
+        setResizable(false);
         add(tabbedPane);
 
-        setSize(500, 500);
+        setSize(500, 600);
         setVisible(true);
     }
 

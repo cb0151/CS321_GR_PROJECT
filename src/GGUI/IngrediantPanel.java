@@ -22,6 +22,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private JButton ingreListAllB;
     private JTable ingredientTable;
     private JScrollPane tablePane;
+    private JScrollPane scrollPane;
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
     LinkedList<IngredientItem> IL;
     public IngrediantPanel(){
@@ -56,9 +57,11 @@ public class IngrediantPanel extends JPanel implements ActionListener {
 
         TableColumnModel columnModel = ingredientTable.getColumnModel();
         columnModel.getColumn(1).setWidth(500);
+        scrollPane = new JScrollPane(ingredientTable,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 
-        add(ingredientTable);
+        scrollPane.setPreferredSize(new Dimension(450, 450));
+        add(scrollPane);
 
 
     }
