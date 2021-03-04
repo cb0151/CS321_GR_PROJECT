@@ -97,6 +97,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     ingreToolBar.setFloatable(false);
     ingreSearchB =new JButton("Search");
     ingreSearchTF =new SelfClearingTextField("Search", 60);
+
     ingreSearchTF.addKeyListener(new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -126,7 +127,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     //The following code builds toolbar;
     {
         ingreToolBar.add(ingreSearchTF);
-
+        ingreSearchTF.setMinimumSize(new Dimension(20,12));
         ingreToolBar.add(ingreSearchB);
         ingreToolBar.add(ingreAddB);
         ingreToolBar.add(ingreUpdateB);
