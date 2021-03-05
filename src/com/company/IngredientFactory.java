@@ -5,13 +5,13 @@ import java.util.LinkedList;
 
 public class IngredientFactory {
 
-    private LinkedList<IngredientItem> list;
+    private ArrayList<IngredientItem> list;
 
     public IngredientFactory() {
-        this.list = new LinkedList<>();
+        this.list = new ArrayList<>();
     }
 
-    public LinkedList<IngredientItem> getList() {
+    public ArrayList<IngredientItem> getList() {
         return list;
     }
 

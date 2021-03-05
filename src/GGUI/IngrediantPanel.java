@@ -12,8 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Locale;
 
 public class IngrediantPanel extends JPanel implements ActionListener {
 
@@ -30,7 +30,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
     private DefaultTableModel DTM;
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
-    LinkedList<IngredientItem> IL;
+    ArrayList<IngredientItem> IL;
     public IngrediantPanel(){
 
         tablePane = new JScrollPane();
@@ -48,7 +48,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     }
     private void buildIngredientTable(){
 
-        IL=ID.getIngredientItemLinkedList();
+        IL=ID.getIngredientItemArrayList();
         String[][] data;
         int n = IL.size();
         data = new String[n][2];

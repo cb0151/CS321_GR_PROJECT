@@ -1,12 +1,12 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.ListIterator;
 
 public class IngredientDictionary {
 
-    private LinkedList<IngredientItem> ingredientItemLinkedList;
+    private ArrayList<IngredientItem> ingredientItemArrayList;
     private static  IngredientDictionary instance = null;
 
     /**
@@ -25,38 +25,38 @@ public class IngredientDictionary {
     }
     private IngredientDictionary()
     {
-        this.ingredientItemLinkedList = new LinkedList<>();
-        for(int i = 0; i < ingredientItemLinkedList.size(); i++){
+        this.ingredientItemArrayList = new ArrayList<>();
+        for(int i = 0; i < ingredientItemArrayList.size(); i++){
 
-            this.ingredientItemLinkedList.add(ingredientItemLinkedList.get(i));
+            this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
 
         }
 
     }
 
     /**
-     * Creates the Linked list for the Singleton
-     * @param ingredientItemLinkedList
+     * Creates the Array list for the Singleton
+     * @param ingredientItemArrayList
      */
-    public void setIngredientItemLinkedList(LinkedList<IngredientItem> ingredientItemLinkedList){
-        this.ingredientItemLinkedList = new LinkedList<>();
-        for(int i = 0; i < ingredientItemLinkedList.size(); i++){
+    public void setIngredientItemArrayList(ArrayList<IngredientItem> ingredientItemArrayList){
+        this.ingredientItemArrayList = new ArrayList<>();
+        for(int i = 0; i < ingredientItemArrayList.size(); i++){
 
-            this.ingredientItemLinkedList.add(ingredientItemLinkedList.get(i));
+            this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
 
         }
     }
 
 
     /**
-     * Constructor to Create a Clone of the Ingredient Item Linked List
-     * @param ingredientItemLinkedList  The Ingredient Item Linked List to be Cloned
+     * Constructor to Create a Clone of the Ingredient Item Array List
+     * @param ingredientItemArrayList  The Ingredient Item Array List to be Cloned
      */
-    public IngredientDictionary(LinkedList<IngredientItem> ingredientItemLinkedList) {
-        this.ingredientItemLinkedList = new LinkedList<>();
-        for(int i = 0; i < ingredientItemLinkedList.size(); i++){
+    public IngredientDictionary(ArrayList<IngredientItem> ingredientItemArrayList) {
+        this.ingredientItemArrayList = new ArrayList<>();
+        for(int i = 0; i < ingredientItemArrayList.size(); i++){
 
-            this.ingredientItemLinkedList.add(ingredientItemLinkedList.get(i));
+            this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
 
         }
     }
@@ -66,35 +66,35 @@ public class IngredientDictionary {
      * TODO look into security issues with passing this from the Dictionary.
      * @return
      */
-    public LinkedList<IngredientItem> getIngredientItemLinkedList() {
-        return ingredientItemLinkedList;
+    public ArrayList<IngredientItem> getIngredientItemArrayList() {
+        return ingredientItemArrayList;
     }
 
     /**
      * Method allows you to get a single Ingredient Item referenced by name
      * @param ingredientName    Name of the Ingredient Item to returned
-     * @return  Returns Ingredient Item Extracted from the Linked List
+     * @return  Returns Ingredient Item Extracted from the Array List
      */
     public IngredientItem getIngredientItem(String ingredientName){
 
         IngredientItem tempIngredientItem = null;
-        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
-            if(this.ingredientItemLinkedList.get(i).getName().equals(ingredientName)){
-                tempIngredientItem = new IngredientItem(this.ingredientItemLinkedList.get(i));
+        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+            if(this.ingredientItemArrayList.get(i).getName().equals(ingredientName)){
+                tempIngredientItem = new IngredientItem(this.ingredientItemArrayList.get(i));
             }
         }
         return tempIngredientItem;
     }
 
     /**
-     * Method to check if an Ingredient Name Already Exists in the Linked List
+     * Method to check if an Ingredient Name Already Exists in the Array List
      * @param ingredientName
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
     public boolean ingredientNameCheck(String ingredientName){
         boolean isIngredient = false;
-        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
-            if(this.ingredientItemLinkedList.get(i).getName().equals(ingredientName)){
+        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+            if(this.ingredientItemArrayList.get(i).getName().equals(ingredientName)){
 
                 isIngredient = true;
             }
@@ -105,15 +105,15 @@ public class IngredientDictionary {
     }
 
     /**
-     * Method to check if an Ingredient Already Exists in the Linked List
+     * Method to check if an Ingredient Already Exists in the Array List
      * @param ingredientItem
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
     public boolean ingredientCheck(IngredientItem ingredientItem){
         boolean isIngredient = false;
-        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
-            if(this.ingredientItemLinkedList.get(i).getName().equals(ingredientItem.getName())){
-                System.out.println("Found Ingredient ::" + this.ingredientItemLinkedList.get(i).getName());
+        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+            if(this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
+                System.out.println("Found Ingredient ::" + this.ingredientItemArrayList.get(i).getName());
                 isIngredient = true;
             }
         }
@@ -136,7 +136,7 @@ public class IngredientDictionary {
 
         if(alreadyExists == false){
             System.out.println("Safe to Add to List");
-            this.ingredientItemLinkedList.add(ingredientItem);
+            this.ingredientItemArrayList.add(ingredientItem);
             System.out.println(ingredientItem.getName() + ":: Has Been Added To the List");
             return true;
         }else {
@@ -155,10 +155,10 @@ public class IngredientDictionary {
         boolean exists = ingredientCheck(ingredientItem);
 
         if(exists == true) {
-            for (int i = 0; i < this.ingredientItemLinkedList.size(); i++) {
-                if (this.ingredientItemLinkedList.get(i).getName().equals(ingredientItem.getName())) {
-                    String temp = this.ingredientItemLinkedList.get(i).getName();
-                    this.ingredientItemLinkedList.remove(i);
+            for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {
+                if (this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())) {
+                    String temp = this.ingredientItemArrayList.get(i).getName();
+                    this.ingredientItemArrayList.remove(i);
                     System.out.println(temp + ":: Removed From Ingredient Dictionary List");
                 }
             }
@@ -179,22 +179,22 @@ public class IngredientDictionary {
     }
 
     /**
-     * Method convert Ingredient Linked List to an Array List of String Printouts
+     * Method convert Ingredient Array List to an Array List of String Printouts
      * @return
      */
     public ArrayList<String> convertToStringArrayList(){
         ArrayList<String> stringArrayList = new ArrayList<>();
-        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
-            stringArrayList.add(this.ingredientItemLinkedList.get(i).toJSONString());
+        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+            stringArrayList.add(this.ingredientItemArrayList.get(i).toJSONString());
         }
         return stringArrayList;
     }
 
     /**
-     * Method for Testing, Prints out all Items in the Ingredient Item Linked List
+     * Method for Testing, Prints out all Items in the Ingredient Item Array List
      */
     public void printDictionary(){
-        ListIterator<IngredientItem> itr = this.ingredientItemLinkedList.listIterator(0);
+        ListIterator<IngredientItem> itr = this.ingredientItemArrayList.listIterator(0);
         while(itr.hasNext()){
             System.out.println(itr.next().toJSONString());
         }
@@ -209,28 +209,28 @@ public class IngredientDictionary {
         //TODO remove, inserted to as place holder
         ChangeLogger changes = new ChangeLogger();
 
-        for(int i = 0; i < this.ingredientItemLinkedList.size(); i++){
-            if(!this.ingredientItemLinkedList.get(i).getName().equals(ingredientItem.getName())){
+        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+            if(!this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
                 //TODO Record Changes
             }
 
-            if(!this.ingredientItemLinkedList.get(i).getType().equals((ingredientItem.getType()))){
+            if(!this.ingredientItemArrayList.get(i).getType().equals((ingredientItem.getType()))){
                 //TODO Record Changes
             }
 
-            if(this.ingredientItemLinkedList.get(i).getCost() != ingredientItem.getCost()){
+            if(this.ingredientItemArrayList.get(i).getCost() != ingredientItem.getCost()){
                 //TODO Record Changes
             }
 
-            if(this.ingredientItemLinkedList.get(i).getWeight() != ingredientItem.getWeight()){
+            if(this.ingredientItemArrayList.get(i).getWeight() != ingredientItem.getWeight()){
                 //TODO Record Changes
             }
 
-            if(!this.ingredientItemLinkedList.get(i).getMeasurementUnit().equals((ingredientItem.getMeasurementUnit()))){
+            if(!this.ingredientItemArrayList.get(i).getMeasurementUnit().equals((ingredientItem.getMeasurementUnit()))){
                 //TODO Record Changes
             }
 
-            if(this.ingredientItemLinkedList.get(i).getQuantityOnHand() != ingredientItem.getQuantityOnHand()){
+            if(this.ingredientItemArrayList.get(i).getQuantityOnHand() != ingredientItem.getQuantityOnHand()){
                 //TODO Record Changes
             }
         }

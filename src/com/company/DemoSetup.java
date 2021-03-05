@@ -35,7 +35,7 @@ public class DemoSetup {
         testFactory.startFactory(FileManager.getObjectArrayList());
         ingredientDictionary = new IngredientDictionary(testFactory.getList());
         //TODO Jonathan
-        ID.setIngredientItemLinkedList(testFactory.getList());
+        ID.setIngredientItemArrayList(testFactory.getList());
 
         try {
             FileManager.close();
