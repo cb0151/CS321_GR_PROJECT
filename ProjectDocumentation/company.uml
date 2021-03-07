@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.company</OriginalElement>
+  <nodes>
+    <node x="-38.5" y="658.0">com.company.InventoryManager</node>
+    <node x="370.0" y="2030.0">com.company.IngredientFactory</node>
+    <node x="323.5" y="-12.5">com.company.FileManager</node>
+    <node x="1162.0" y="1113.0">com.company.IngredientDictionary</node>
+    <node x="773.0" y="1505.0">com.company.IngredientItem</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Directed Orthogonal" zoom="0.26537216828478966" x="719.5" y="1058.5" />
+  <SelectedNodes>
+    <node>com.company.InventoryManager</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
