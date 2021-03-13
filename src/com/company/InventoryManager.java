@@ -30,6 +30,7 @@ public class InventoryManager {
         FileManager.createObjectArray();
         IngredientFactory.startFactory(FileManager.getObjectArrayList());
         IngredientDictionary = new IngredientDictionary(IngredientFactory.getList());
+
         try {
             FileManager.close();
         } catch (IOException e) {

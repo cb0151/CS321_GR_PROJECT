@@ -18,6 +18,11 @@ public class ChangeLogger {
         return originalIngredientFile;
     }
 
+    /**
+     * Method Needs the Original Read In Array String to save in this array directly
+     * Using a Deep Copy.
+     * @param originalIngredientFile    The Original Ingredient File Array List of Strings
+     */
     public void setOriginalIngredientFile(ArrayList<String> originalIngredientFile) {
         this.originalIngredientFile = originalIngredientFile;
     }
@@ -28,5 +33,18 @@ public class ChangeLogger {
 
     public void setOriginalRecipeFile(ArrayList<String> originalRecipeFile) {
         this.originalRecipeFile = originalRecipeFile;
+    }
+    public void recordDelete(){
+
+    }
+
+    public void recordAdd(){
+
+    }
+    public void recordUpdate(){
+
+    }
+    public void compareToOriginal(){
+
     }
 }

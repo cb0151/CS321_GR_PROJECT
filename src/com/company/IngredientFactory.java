@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class IngredientFactory {
-
+//TODO exceptions
     private ArrayList<IngredientItem> list;
 
     public IngredientFactory() {

@@ -8,6 +8,7 @@ public class IngredientDictionary {
 
     private ArrayList<IngredientItem> ingredientItemArrayList;
     private static  IngredientDictionary instance = null;
+    private static ChangeLogger ingredientChangeLogger;
 
     /**
      * Gets instance the single instance of IngredientFact
@@ -45,6 +46,7 @@ public class IngredientDictionary {
             this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
 
         }
+
     }
 
 
