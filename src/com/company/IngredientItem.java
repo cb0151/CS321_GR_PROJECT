@@ -159,7 +159,6 @@ public class IngredientItem implements Cloneable{
 
     /**
      * Method to take an Array List of String to convert to Ingredient Item
-     * TODO Update code to reflect JSON file type, and To Read In Attribute Names stored to call a switch statement
      * @param list
      */
     public IngredientItem(ArrayList<String> list){

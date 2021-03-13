@@ -14,6 +14,13 @@ public class FileManager extends Reader {
     private String line;
     private String fileName;
 
+    private static String NEXTLINE = ",\n";
+    private static String ENDOFFILE = "\n" +
+            "\n" +
+            "\n" +
+            "]\n" +
+            "}";
+
 
 
     /**
@@ -33,68 +40,85 @@ public class FileManager extends Reader {
         this.closeFileReader();
     }
 
-    /**
-     * Method to Generate a JSON File using the formatted String Array List for Ingredients
-     * @throws IOException
-     */
-    public void generateIngredientJSONFile() throws IOException {
-        this.openFileWriter();
-
-        this.writer.write("{\n" +
-                "\"Ingredients\":\n" +
-                "\n" +
-                "[\n");
-
-        for(int i = 0; i < this.stringArrayList.size(); i++){
-            //System.out.println("Adding Ingredient to Txt File Next");
-            this.writer.write(this.stringArrayList.get(i).toString());
-
-            if(i != this.stringArrayList.size() - 1){
-                this.writer.write(",\n");
-            }else{
-                this.writer.write("\n" +
-                        "\n" +
-                        "\n" +
-                        "]\n" +
-                        "}");
-            }
-            //System.out.println("Just added " + this.stringArrayList.get(i).toString());
-        }
-        this.closeFileWriter();
-    }
 
     /**
      * Method to Generate a JSON File using the formatted String Array List For Recipes
      * @throws IOException
      */
-    public void generateRecipesJSONFile() throws IOException {
+    public void generateJSONFile(String fileType) throws IOException {
         this.openFileWriter();
 
-        this.writer.write("{\n" +
-                "\"Recipes\":\n" +
-                "\n" +
-                "[\n");
+        switch (fileType){
+            case "Ingredients":
+                this.writer.write("{\n" +
+                        "\"Ingredients\":\n" +
+                        "\n" +
+                        "[\n");
+                break;
+            case "Recipes":
+                this.writer.write("{\n" +
+                        "\"Recipes\":\n" +
+                        "\n" +
+                        "[\n");
+                break;
+            case "Changes":
+                this.writer.write("{\n" +
+                        "\"Changes\":\n" +
+                        "\n" +
+                        "[\n");
+        }
 
         for(int i = 0; i < this.stringArrayList.size(); i++){
-            //System.out.println("Adding Ingredient to Txt File Next");
+            //System.out.println("Adding to JSON File Next Element");
             this.writer.write(this.stringArrayList.get(i).toString());
 
             if(i != this.stringArrayList.size() - 1){
-                this.writer.write(",\n");
+                this.writer.write(NEXTLINE);
             }else{
-                this.writer.write("\n" +
-                        "\n" +
-                        "\n" +
-                        "]\n" +
-                        "}");
+                this.writer.write(ENDOFFILE);
             }
             //System.out.println("Just added " + this.stringArrayList.get(i).toString());
         }
         this.closeFileWriter();
     }
 
+    /**
+     * Method to allow to append to the end of a file
+     * @param appendages
+     * @throws IOException
+     */
+    public void appendToFile(ArrayList<String> appendages) throws IOException {
+        //Generate the String Array List and Remove the Last 4 Lines to allow for appending.
+        this.generateStringArrayList();
+        for(int i = 0; i < 4; i++){
+            int length = this.stringArrayList.size();
+            this.stringArrayList.remove(length - 1);
+        }
+        this.openFileWriter();
+        for(int i = 0; i < this.stringArrayList.size(); i++){
+            //System.out.println("Adding to JSON File Next Element");
+            this.writer.write(this.stringArrayList.get(i).toString());
 
+            if(i != this.stringArrayList.size() - 1){
+                this.writer.write(NEXTLINE);
+            }else{
+                for(int j = 0; j < appendages.size(); j++) {
+                    //System.out.println("Appending to JSON File Next");
+                    this.writer.write(appendages.get(j).toString());
 
+                    if (j != appendages.size() - 1) {
+                        this.writer.write(NEXTLINE);
+                    } else {
+                        this.writer.write(ENDOFFILE);
+                    }
+                }
+            }
+            //System.out.println("Just added " + this.stringArrayList.get(i).toString());
+        }
+
+        this.closeFileWriter();
+
+    }
     //METHODS TO OPEN AND CLOSE FILE READER,WRITER, AND BUFFERED READER
 
     /**

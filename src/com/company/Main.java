@@ -10,7 +10,7 @@ public class Main {
 	// write your code here
 
         DemoSetup demoSetup = new DemoSetup();
-       new loginGUI();
+       //new loginGUI();
 
 
 

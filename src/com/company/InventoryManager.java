@@ -54,7 +54,7 @@ public class InventoryManager {
         FileManager.setStringArrayList(IngredientDictionary.convertToStringArrayList());
 
         try {
-            FileManager.generateIngredientJSONFile();
+            FileManager.generateJSONFile("Ingredients");
         } catch (IOException e) {
             e.printStackTrace();
         }
