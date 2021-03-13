@@ -85,6 +85,17 @@ public class IngredientDictionary {
                 tempIngredientItem = new IngredientItem(this.ingredientItemArrayList.get(i));
             }
         }
+        //Exception Handling for ingredient not in array list.
+        try{
+            for(int i=0;i>-1;i++){
+                if (ingredientItemArrayList.get(i).getName().equals(ingredientName)){
+                    i=-2;
+                }
+            }
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println(ingredientName+":: Ingredient Not Found");
+        }
         return tempIngredientItem;
     }
 
@@ -112,6 +123,7 @@ public class IngredientDictionary {
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
     public boolean ingredientCheck(IngredientItem ingredientItem){
+
         boolean isIngredient = false;
         for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
             if(this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
@@ -191,7 +203,16 @@ public class IngredientDictionary {
         }
         return stringArrayList;
     }
-
+    /**
+     * This method results the total cost of all items in the inventory
+     */
+    public double inventoryCost(){
+        double finalCost = 0;
+        for (IngredientItem i:ingredientItemArrayList) {
+           finalCost+=i.getCost();
+       }
+        return finalCost;
+    }
     /**
      * Method for Testing, Prints out all Items in the Ingredient Item Array List
      */

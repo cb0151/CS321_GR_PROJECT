@@ -33,9 +33,16 @@ public class DemoInventory {
 
    public void testInventory(){
         System.out.println("Initialize Inventory");
-        //InventoryManager Manager = new InventoryManager(ingredientDictionary);
+        InventoryManager Manager = new InventoryManager();
         System.out.println("Successfully loaded Inventory");
-
+        double curcost = Manager.curInventoryCost();
+        double initcost = Manager.initialInventorycost;
+        Manager.removeIngredient(Manager.searchIngredient("BEEFS BROTH"));
+        Manager.removeIngredient(Manager.searchIngredient("BROWN SUGAR"));
+        double newcost = Manager.curInventoryCost();
+        System.out.println("Initial Cost: "+initcost);
+       System.out.println("Current Cost: "+newcost);
+       System.out.println("Also Initial Cost: "+curcost);
 
    }
 

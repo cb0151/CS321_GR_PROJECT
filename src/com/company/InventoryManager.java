@@ -2,19 +2,21 @@ package com.company;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
-//This is a very early version of Inventory that I made just to test how some functionalities will be implemented. Adding exception checks and covering all use cases soon.
+
 public class InventoryManager {
     IngredientDictionary IngredientDictionary; //Copy instance of IngredientDictionary here to load inventory
 
     FileManager FileManager;
     IngredientFactory IngredientFactory;
-
+    double initialInventorycost;
     public InventoryManager(){
         //TODO make so that it takes in a file name here for either Initial Setup or Demo Setup
         FileManager = new FileManager("DataSource/ingredients.json");
         IngredientFactory = new IngredientFactory();
         createIngredientDictionary();
+        initialInventorycost = IngredientDictionary.inventoryCost();
     }
 
     /**
@@ -72,18 +74,21 @@ public class InventoryManager {
 
 
     public IngredientItem searchIngredient(String searchInput){
-        IngredientItem SearchResult = IngredientDictionary.getIngredientItem(searchInput);
-        if(!SearchResult.equals(null)){
-            return SearchResult;
-        }else {
-            System.out.println("Ingredient Not Found");
-            return null;
-        }   //TODO change to through exception
 
-/*        if (SearchResult.equals(null)){
-            System.out.println("Ingredient not found. ");
-        }
-        return SearchResult;*/
+
+        IngredientItem SearchResult = IngredientDictionary.getIngredientItem(searchInput);
+
+//        if(!SearchResult.equals(null)){
+//            return SearchResult;
+//        }else {
+//            System.out.println("Ingredient Not Found");
+//            return null;
+//        }   //TODO change to through exception
+//
+//       if (SearchResult.equals(null)){
+//            System.out.println("Ingredient not found. ");
+//        }
+        return SearchResult;
     }
 
     public void addIngredient(IngredientItem addItem){
@@ -140,17 +145,23 @@ public class InventoryManager {
      * @param removeItem    Ingredient Item to be Removed from the Ingredient Dictionary
      */
     public void removeIngredient(IngredientItem removeItem){
-
-        IngredientDictionary.removeIngredientFromList(removeItem);
-
-/*        IngredientItem newitem = new IngredientItem();
+     //Probably don't need this exception here. Causes it to print twice. Exception already added to the search function,
+     //but removing the exception from removeIngredient leads to errors the way its currently coded. Could easily be fixed
+     //depending on how we choose to remove ingredients from the array.
+    try {
+    IngredientDictionary.removeIngredientFromList(removeItem);
+    }
+    catch (NullPointerException e){
+    System.out.println("::Ingredient Not Found");
+    }
+/*         IngredientItem newitem = new IngredientItem();
         newitem = this.searchIngredient(newitem.getName());
         if (!newitem.equals(null)){
             IngredientDictionary.removeIngredientFromList(newitem);
         }*/
     }
 
-    public double calculateCost(String ingredient){
+    public double calculateCost(String ingredient, double quantity){
         /*TODO
         *This I think would be the following formula
         *Beginning Inventory (at the beginning of the year)
@@ -160,10 +171,22 @@ public class InventoryManager {
 
          */
     //Do we prompt for quantity of item in question we are trying to calculate?
-
-        double quantity = 0.5;
         //Unit calculation comes here
         return quantity*searchIngredient(ingredient).getCost();
+    }
+/**
+ * This returns the current cost of all items in the inventory.
+ * @return A double which represents the current cost of all items in the inventory
+ * */
+    public double curInventoryCost(){
+        return IngredientDictionary.inventoryCost();
+    }
+    /**
+     * This returns the difference between the initial cost of all items and the current cost.
+     * @return A double which represents the cost difference.
+     * */
+    public double costDifference(){
+        return initialInventorycost - curInventoryCost();
     }
 
     /**
