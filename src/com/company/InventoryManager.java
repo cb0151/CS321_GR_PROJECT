@@ -72,6 +72,39 @@ public class InventoryManager {
         }
     }
 
+    /**
+     * Method to Update a Single Item and Get its original for Storing the Changes made.
+     * @param updateItem The Item to be updated.
+     */
+    public void updateIngredientItem(IngredientItem updateItem){
+        //Gets the Original Item from the Dictionary Prior to Updating.
+        IngredientItem original = new IngredientItem(this.IngredientDictionary.getIngredientItem(updateItem.getName()));
+        this.IngredientDictionary.updateIngredientInList(updateItem);
+
+        //TODO add methods to create a change log for the item
+        if(!original.getName().equals(updateItem.getName())){
+            //TODO Record Changes
+        }
+        if(!original.getType().equals(updateItem.getType())){
+            //TODO Record Changes
+        }
+
+        if(original.getCost() != updateItem.getCost()){
+            //TODO Record Changes
+        }
+
+        if(original.getWeight() != updateItem.getWeight()){
+            //TODO Record Changes
+        }
+
+        if(!original.getMeasurementUnit().equals((updateItem.getMeasurementUnit()))){
+            //TODO Record Changes
+        }
+
+        if(original.getQuantityOnHand() != updateItem.getQuantityOnHand()){
+            //TODO Record Changes
+        }
+    }
 
 
 
