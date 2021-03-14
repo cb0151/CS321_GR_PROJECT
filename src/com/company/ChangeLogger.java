@@ -7,7 +7,7 @@ public class ChangeLogger {
     private ArrayList<String> originalIngredientFile;
     private ArrayList<String> originalRecipeFile;
     private ArrayList<String> changesMade;
-    //TODO Create other original Attributes that would need to be temporarly stored for Change Logging
+    //TODO Create other original Attributes that would need to be temporarily stored for Change Logging
     //TODO Methods that compare the Original to the New Read out to record changes, also to generate Reports
 
     public ChangeLogger() {
@@ -39,6 +39,13 @@ public class ChangeLogger {
             this.originalRecipeFile.add(originalRecipeFile.get(i));
         }
     }
+
+    /**
+     * Method to Record the Change Being Made
+     * @param action
+     * @param original
+     * @param change
+     */
     public void recordIngredientChange(String action, IngredientItem original, IngredientItem change){
         //TODO add methods to add to the "changesMade" array list using the "appendToFile" method in File Manager
         switch (action){

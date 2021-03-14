@@ -77,6 +77,7 @@ public class InventoryManager {
      * @param updateItem The Item to be updated.
      */
     public void updateIngredientItem(IngredientItem updateItem){
+        String changeLoggerAction = "update";   //TODO make a Constant of these Strings
         //Gets the Original Item from the Dictionary Prior to Updating.
         IngredientItem original = new IngredientItem(this.IngredientDictionary.getIngredientItem(updateItem.getName()));
         this.IngredientDictionary.updateIngredientInList(updateItem);
