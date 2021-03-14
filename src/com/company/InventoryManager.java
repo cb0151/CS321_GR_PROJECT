@@ -10,6 +10,7 @@ public class InventoryManager {
 
     FileManager FileManager;
     IngredientFactory IngredientFactory;
+    ChangeLogger InventoryChangeLogger;
     double initialInventorycost;
     public InventoryManager(){
         //TODO make so that it takes in a file name here for either Initial Setup or Demo Setup
@@ -26,6 +27,9 @@ public class InventoryManager {
     private void createIngredientDictionary(){
         try {
             FileManager.generateStringArrayList();
+            InventoryChangeLogger = new ChangeLogger();
+            //This will set the Original Ingredient File in Change Logger. This is the Raw read in String.
+            InventoryChangeLogger.setOriginalIngredientFile(FileManager.getStringArrayList());
         } catch (IOException e) {
             e.printStackTrace();
         }
