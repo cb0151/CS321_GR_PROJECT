@@ -101,21 +101,16 @@ public class IngredientDictionary {
 
     /**
      * Method to check if an Ingredient Name Already Exists in the Array List
-     * @param ingredientName
+     * @param ingredientName Name of the Ingredient to be Searched for
      * @return  Boolean Value to be returned to verify the operation succeeded.
+     * This is a duplicate method so that if the "Name" of the Ingredient Item needs to be searched for.
      */
-    public boolean ingredientNameCheck(String ingredientName){
+    public boolean ingredientCheck(String ingredientName){
         boolean isIngredient = false;
-        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
-            if(this.ingredientItemArrayList.get(i).getName().equals(ingredientName)){
-
-                isIngredient = true;
-            }
-        }
         try{
-            for(int i=0;i>-1;i++){
-                if (ingredientItemArrayList.get(i).getName().equals(ingredientName)){
-                    i=-2;
+            for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+                if(this.ingredientItemArrayList.get(i).getName().equals(ingredientName)){
+                    isIngredient = true;
                 }
             }
         }
@@ -130,6 +125,8 @@ public class IngredientDictionary {
      * Method to check if an Ingredient Already Exists in the Array List
      * @param ingredientItem
      * @return  Boolean Value to be returned to verify the operation succeeded.
+     * This is a duplicate method so that if other elements of the Ingredient Item need to be searched for
+     * TODO implement elements to check other elements of the Ingredient Item
      */
     public boolean ingredientCheck(IngredientItem ingredientItem){
 
@@ -141,11 +138,6 @@ public class IngredientDictionary {
                     isIngredient = true;
                 }
             }
-//            for(int i=0;i>-1;i++){
-//                if (ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
-//                    i=-2;
-//                }
-//            }
         }
         catch(NullPointerException e){
             System.out.println(e.getMessage());
