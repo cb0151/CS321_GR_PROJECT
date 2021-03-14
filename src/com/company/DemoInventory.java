@@ -37,6 +37,7 @@ public class DemoInventory {
         System.out.println("Successfully loaded Inventory");
         double curcost = Manager.curInventoryCost();
         double initcost = Manager.initialInventorycost;
+        //IngredientItem test = Manager.searchIngredient("BEEFS BROTH");
         Manager.removeIngredient(Manager.searchIngredient("BEEFS BROTH"));
         Manager.removeIngredient(Manager.searchIngredient("BROWN SUGAR"));
         double newcost = Manager.curInventoryCost();

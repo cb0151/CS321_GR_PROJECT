@@ -112,7 +112,16 @@ public class IngredientDictionary {
                 isIngredient = true;
             }
         }
-
+        try{
+            for(int i=0;i>-1;i++){
+                if (ingredientItemArrayList.get(i).getName().equals(ingredientName)){
+                    i=-2;
+                }
+            }
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println(ingredientName+":: Ingredient Not Found");
+        }
 
         return isIngredient;
     }
@@ -125,14 +134,24 @@ public class IngredientDictionary {
     public boolean ingredientCheck(IngredientItem ingredientItem){
 
         boolean isIngredient = false;
-        for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
-            if(this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
-                System.out.println("Found Ingredient ::" + this.ingredientItemArrayList.get(i).getName());
-                isIngredient = true;
+        try{
+            for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+                if(this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
+                    System.out.println("Found Ingredient ::" + this.ingredientItemArrayList.get(i).getName());
+                    isIngredient = true;
+                }
             }
+//            for(int i=0;i>-1;i++){
+//                if (ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())){
+//                    i=-2;
+//                }
+//            }
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
         }
         //TODO add exception Handling here
-        if(isIngredient == false) System.out.println(ingredientItem.getName() + " :: Error Not Found");
+        //if(isIngredient == false) System.out.println(ingredientItem.getName() + " :: Error Not Found");
 
         return isIngredient;
     }
@@ -166,7 +185,7 @@ public class IngredientDictionary {
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
     public void removeIngredientFromList(IngredientItem ingredientItem){
-        boolean exists = ingredientCheck(ingredientItem);
+       boolean exists = ingredientCheck(ingredientItem);
 
         if(exists == true) {
             for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {

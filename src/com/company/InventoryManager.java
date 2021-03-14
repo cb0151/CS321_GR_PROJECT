@@ -12,6 +12,8 @@ public class InventoryManager {
     IngredientFactory IngredientFactory;
     ChangeLogger InventoryChangeLogger;
     double initialInventorycost;
+
+
     public InventoryManager(){
         //TODO make so that it takes in a file name here for either Initial Setup or Demo Setup
         FileManager = new FileManager("DataSource/ingredients.json");
@@ -112,8 +114,6 @@ public class InventoryManager {
 
 
     public IngredientItem searchIngredient(String searchInput){
-
-
         IngredientItem SearchResult = IngredientDictionary.getIngredientItem(searchInput);
 
 //        if(!SearchResult.equals(null)){
@@ -183,21 +183,13 @@ public class InventoryManager {
      * @param removeItem    Ingredient Item to be Removed from the Ingredient Dictionary
      */
     public void removeIngredient(IngredientItem removeItem){
-     //Probably don't need this exception here. Causes it to print twice. Exception already added to the search function,
-     //but removing the exception from removeIngredient leads to errors the way its currently coded. Could easily be fixed
-     //depending on how we choose to remove ingredients from the array.
-    try {
-    IngredientDictionary.removeIngredientFromList(removeItem);
-    }
-    catch (NullPointerException e){
-    System.out.println("::Ingredient Not Found");
-    }
-/*         IngredientItem newitem = new IngredientItem();
-        newitem = this.searchIngredient(newitem.getName());
-        if (!newitem.equals(null)){
-            IngredientDictionary.removeIngredientFromList(newitem);
-        }*/
-    }
+
+    this.IngredientDictionary.removeIngredientFromList(removeItem);
+
+}
+
+
+
 
     public double calculateCost(String ingredient, double quantity){
         /*TODO
