@@ -196,6 +196,17 @@ public class IngredientItem implements Cloneable{
         }
     }
 
+    public IngredientItem(String name, String type, String measurementUnit,
+                          double cost, double weight, double quantityOnHand, Date lastUsedDate) {
+        this.name = name;
+        this.type = type;
+        this.measurementUnit = measurementUnit;
+        this.cost = cost;
+        this.weight = weight;
+        this.quantityOnHand = quantityOnHand;
+        this.lastUsedDate = lastUsedDate;
+    }
+
     /**
      * Method to Get the Name of the Ingredient Item
      * @return the Ingredient Item's Name

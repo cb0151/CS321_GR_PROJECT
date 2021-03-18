@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ChangeLogger {
@@ -7,12 +8,15 @@ public class ChangeLogger {
     private ArrayList<String> originalIngredientFile;
     private ArrayList<String> originalRecipeFile;
     private ArrayList<String> changesMade;
+    private static final String changeLogFilePath = "DataSource/ChangeLog.json";
     //TODO Create other original Attributes that would need to be temporarily stored for Change Logging
     //TODO Methods that compare the Original to the New Read out to record changes, also to generate Reports
 
     public ChangeLogger() {
-        originalIngredientFile = new ArrayList<>();
-        originalRecipeFile = new ArrayList<>();
+        this.originalIngredientFile = new ArrayList<>();
+        this.originalRecipeFile = new ArrayList<>();
+        this.changesMade = new ArrayList<>();
+        this.createChangeLogFile();
     }
 
     public ArrayList<String> getOriginalIngredientFile() {
@@ -42,21 +46,53 @@ public class ChangeLogger {
 
     /**
      * Method to Record the Change Being Made
-     * @param action
-     * @param original
-     * @param change
+     * @param action    The Enumerated Type ChangeLoggerAction to be recorded
+     * @param original  The Original Item if Updating Item
+     * @param change    The Changed Item if Updating Item
      */
-    public void recordIngredientChange(String action, IngredientItem original, IngredientItem change){
-        //TODO add methods to add to the "changesMade" array list using the "appendToFile" method in File Manager
+    public void recordIngredientChange(ChangeLoggerAction action, IngredientItem original, IngredientItem change){
         switch (action){
-            case "Add":
-                //TODO add method to record that an add ingredient has occurred
+            case ADD:
+                //Adds the Items to Added to the Change Made ArrayList
+                this.changesMade.add("{\"ChangeAction\" : \"ADDED\", \"" +
+                        "name\" : \"" + original.getName() + "\", \"" +
+                        "type\" : \"" + original.getType() + "\", \"" +
+                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
+                        "cost\" : \"" + original.getCost() + "\", \"" +
+                        "weight\" : \"" + original.getWeight()+ "\", \"" +
+                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
+                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
                 break;
-            case "Delete":
-                //TODO add method to record that a delete ingredient has occurred
+            case DELETE:
+                //Adds the Item to be Deleted to the Changes Made ArrayList
+                this.changesMade.add("{\"ChangeAction\" : \"DELETED\", \"" +
+                        "name\" : \"" + original.getName() + "\", \"" +
+                        "type\" : \"" + original.getType() + "\", \"" +
+                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
+                        "cost\" : \"" + original.getCost() + "\", \"" +
+                        "weight\" : \"" + original.getWeight()+ "\", \"" +
+                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
+                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
                 break;
-            case "Update":
-                //TODO add method to record that an update ingredient has occurred
+            case UPDATE:
+                //Adds the Updating Item Original and New to the Changes Made ArrayList
+                this.changesMade.add("{\"ChangeAction\" : \"UPDATED\", \"" +
+                        "name\" : \"" + original.getName() + "\", \"" +
+                        "type\" : \"" + original.getType() + "\", \"" +
+                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
+                        "cost\" : \"" + original.getCost() + "\", \"" +
+                        "weight\" : \"" + original.getWeight()+ "\", \"" +
+                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
+                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
+                //Adding the Changed item
+                this.changesMade.add("{\"ChangeAction\" : \"UPDATED\", \"" +
+                        "name\" : \"" + change.getName() + "\", \"" +
+                        "type\" : \"" + change.getType() + "\", \"" +
+                        "measurementUnit\" : \"" + change.getMeasurementUnit() + "\", \"" +
+                        "cost\" : \"" + change.getCost() + "\", \"" +
+                        "weight\" : \"" + change.getWeight()+ "\", \"" +
+                        "quantityOnHand\" : \"" + change.getQuantityOnHand() + "\", \"" +
+                        "lastUsedDate\" : \"" + change.getLastUsedDate() + "\"}");
                 break;
             default:
                 //TODO exception handling here
@@ -65,6 +101,25 @@ public class ChangeLogger {
     }
 
 
+    public void beforeClosing(){
+
+        FileManager changeFile = new FileManager(changeLogFilePath);
+        changeFile.appendToFile(changesMade,FileType.CHANGELOG);
+
+    }
+
+    private boolean createChangeLogFile(){
+        //TODO INCOMPLETE METHOD
+        FileManager newFile = new FileManager(changeLogFilePath);
+        newFile.createFile();
+        try {
+            newFile.generateJSONFile(FileType.CHANGELOG);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(newFile.fileExists() == true) return true;
+        else return false;
+    }
     public void compareToOriginal(){
 
     }

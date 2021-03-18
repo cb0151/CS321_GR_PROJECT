@@ -62,7 +62,7 @@ public class InventoryManager {
         FileManager.setStringArrayList(IngredientDictionary.convertToStringArrayList());
 
         try {
-            FileManager.generateJSONFile("Ingredients");
+            FileManager.generateJSONFile(FileType.INGREDIENTS);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,38 +79,36 @@ public class InventoryManager {
      * @param updateItem The Item to be updated.
      */
     public void updateIngredientItem(IngredientItem updateItem){
-        String changeLoggerAction = "update";   //TODO make a Constant of these Strings
-        //Gets the Original Item from the Dictionary Prior to Updating.
+            //Gets the Original Item from the Dictionary Prior to Updating.
         IngredientItem original = new IngredientItem(this.IngredientDictionary.getIngredientItem(updateItem.getName()));
+            //Records both Original and Updated Item versions to the Changelog
+        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, original, updateItem);
+            //Updates the Item in the Ingredient Dictionary
         this.IngredientDictionary.updateIngredientInList(updateItem);
-
-        //TODO add methods to create a change log for the item
-        if(!original.getName().equals(updateItem.getName())){
-            //TODO Record Changes
-        }
-        if(!original.getType().equals(updateItem.getType())){
-            //TODO Record Changes
-        }
-
-        if(original.getCost() != updateItem.getCost()){
-            //TODO Record Changes
-        }
-
-        if(original.getWeight() != updateItem.getWeight()){
-            //TODO Record Changes
-        }
-
-        if(!original.getMeasurementUnit().equals((updateItem.getMeasurementUnit()))){
-            //TODO Record Changes
-        }
-
-        if(original.getQuantityOnHand() != updateItem.getQuantityOnHand()){
-            //TODO Record Changes
-        }
     }
 
+    /**
+     * Method to Add an Ingredient to the Inventory
+     * @param addItem   The Ingredient Item to be Added
+     */
+    public void addIngredient(IngredientItem addItem){
+            //Records the Item to be Added to the Ingredient Dictionary
+        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.ADD,addItem,null);
+            //Adds the Item to the Ingredient Dictionary
+        IngredientDictionary.addIngredientToList(addItem);
+    }
 
+    /**
+     * Method to Remove/Delete from Inventory
+     * @param removeItem    Ingredient Item to be Removed/Deleted
+     */
+    public void removeIngredient(IngredientItem removeItem){
+            //Records the Item to Removed from the Ingredient Dictionary to the ChangeLog
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE,removeItem,null);
+            //Removes the Item from the Ingredient Dictionary
+        this.IngredientDictionary.removeIngredientFromList(removeItem);
 
+    }
 
 
     public IngredientItem searchIngredient(String searchInput){
@@ -129,20 +127,7 @@ public class InventoryManager {
         return SearchResult;
     }
 
-    public void addIngredient(IngredientItem addItem){
-        //IngredientItem newitem = PromptForInput()
-        // Not sure how we are going to implement this just yet, but I imagine we prompt
-        //for details and add them as new ingredients to the Dictionary.
 
-        IngredientDictionary.addIngredientToList(addItem);
-
-/*        IngredientItem newitem = new IngredientItem();
-        newitem = this.searchIngredient(newitem.getName());
-
-        if (!newitem.equals(null)){
-            IngredientDictionary.addIngredientToList(newitem);
-        }*/
-    }
 
     //This function will prompt the user for details about the new ingredient.
     // All attributes will go into the arraylist.
@@ -178,15 +163,7 @@ public class InventoryManager {
         return newIngredient;
     }
 
-    /**
-     * Method to Remove Specified Ingredient Item
-     * @param removeItem    Ingredient Item to be Removed from the Ingredient Dictionary
-     */
-    public void removeIngredient(IngredientItem removeItem){
 
-    this.IngredientDictionary.removeIngredientFromList(removeItem);
-
-}
 
 
 

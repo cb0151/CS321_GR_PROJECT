@@ -4,12 +4,14 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
+import static com.company.FileType.*;
+
 public class FileManager extends Reader {
 
     private ArrayList<String> stringArrayList;
     private ArrayList<ArrayList<String>> objectArrayList;
     private FileReader reader;
-    private FileWriter writer;
+    private BufferedWriter writer;
     private BufferedReader buffer;
     private String line;
     private String fileName;
@@ -31,8 +33,6 @@ public class FileManager extends Reader {
 
         this.openFileReader();
 
-        this.buffer = new BufferedReader(reader);
-
         while((this.line = this.buffer.readLine()) != null){
             this.stringArrayList.add(this.line);
             //System.out.println("Added String: " + this.line);
@@ -45,39 +45,45 @@ public class FileManager extends Reader {
      * Method to Generate a JSON File using the formatted String Array List For Recipes
      * @throws IOException
      */
-    public void generateJSONFile(String fileType) throws IOException {
+    public void generateJSONFile(FileType fileType) throws IOException {
         this.openFileWriter();
 
         switch (fileType){
-            case "Ingredients":
+            case INGREDIENTS:
                 this.writer.write("{\n" +
-                        "\"Ingredients\":\n" +
+                        "\"" + INGREDIENTS + "\":\n" +
                         "\n" +
                         "[\n");
                 break;
-            case "Recipes":
+            case RECIPES:
                 this.writer.write("{\n" +
-                        "\"Recipes\":\n" +
+                        "\"" + RECIPES + "\":\n" +
                         "\n" +
                         "[\n");
                 break;
-            case "Changes":
+            case CHANGELOG:
                 this.writer.write("{\n" +
-                        "\"Changes\":\n" +
+                        "\"" + CHANGELOG + "\":\n" +
                         "\n" +
                         "[\n");
         }
 
-        for(int i = 0; i < this.stringArrayList.size(); i++){
-            //System.out.println("Adding to JSON File Next Element");
-            this.writer.write(this.stringArrayList.get(i).toString());
+        if(this.stringArrayList.isEmpty()){
+            //TODO INCOMPLETE METHOD
+            this.writer.write("\n\n\n");
+            this.writer.write(ENDOFFILE);
+        }else {
+            for (int i = 0; i < this.stringArrayList.size(); i++) {
+                //System.out.println("Adding to JSON File Next Element");
+                this.writer.write(this.stringArrayList.get(i));
 
-            if(i != this.stringArrayList.size() - 1){
-                this.writer.write(NEXTLINE);
-            }else{
-                this.writer.write(ENDOFFILE);
+                if (i != this.stringArrayList.size() - 1) {
+                    this.writer.write(NEXTLINE);
+                } else {
+                    this.writer.write(ENDOFFILE);
+                }
+                //System.out.println("Just added " + this.stringArrayList.get(i).toString());
             }
-            //System.out.println("Just added " + this.stringArrayList.get(i).toString());
         }
         this.closeFileWriter();
     }
@@ -85,40 +91,57 @@ public class FileManager extends Reader {
     /**
      * Method to allow to append to the end of a file
      * @param appendages
+     * @param fileType
      * @throws IOException
      */
-    public void appendToFile(ArrayList<String> appendages) throws IOException {
-        //Generate the String Array List and Remove the Last 4 Lines to allow for appending.
-        this.generateStringArrayList();
+    public void appendToFile(ArrayList<String> appendages, FileType fileType){
+        //TODO INCOMPLETE METHOD
+        //Creates the File as an Array List
+        try {
+            this.generateStringArrayList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Removes the last for lines of the file string.
         for(int i = 0; i < 4; i++){
-            int length = this.stringArrayList.size();
-            this.stringArrayList.remove(length - 1);
-        }
-        this.openFileWriter();
-        for(int i = 0; i < this.stringArrayList.size(); i++){
-            //System.out.println("Adding to JSON File Next Element");
-            this.writer.write(this.stringArrayList.get(i).toString());
-
-            if(i != this.stringArrayList.size() - 1){
-                this.writer.write(NEXTLINE);
-            }else{
-                for(int j = 0; j < appendages.size(); j++) {
-                    //System.out.println("Appending to JSON File Next");
-                    this.writer.write(appendages.get(j).toString());
-
-                    if (j != appendages.size() - 1) {
-                        this.writer.write(NEXTLINE);
-                    } else {
-                        this.writer.write(ENDOFFILE);
-                    }
-                }
-            }
-            //System.out.println("Just added " + this.stringArrayList.get(i).toString());
+            int index = this.stringArrayList.size();
+            this.stringArrayList.remove(this.stringArrayList.get(index - 1));
         }
 
-        this.closeFileWriter();
+        //Adds the Elements of Appendages to the End of the Main String ArrayList
+        for(int i = 0; i < appendages.size(); i++){
+            this.stringArrayList.add(appendages.get(i));
+        }
 
+        //Clears the File and ReWrites it with the appendages
+        try {
+            this.generateJSONFile(fileType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
+    public boolean fileExists(){
+        //TODO INCOMPLETE METHOD
+        File file = new File(this.fileName);
+        if(file.exists() == true) return true;
+        else return false;
+    }
+
+    public boolean createFile(){
+        //TODO INCOMPLETE METHOD
+        File file = new File(this.fileName);
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("ERROR CREATING FILE");
+            return false;
+        }
+    }
+
     //METHODS TO OPEN AND CLOSE FILE READER,WRITER, AND BUFFERED READER
 
     /**
@@ -130,7 +153,7 @@ public class FileManager extends Reader {
             System.out.println("Please Enter the File Name or File Path");
             this.fileName = this.getUserInput();
         }
-        this.reader = new FileReader(this.fileName);
+        this.buffer = new BufferedReader(new FileReader(this.fileName));
     }
 
     /**
@@ -138,7 +161,7 @@ public class FileManager extends Reader {
      * @throws IOException
      */
     private void closeFileReader() throws IOException {
-        this.reader.close();
+        //this.reader.close();
         this.buffer.close();
     }
 
@@ -151,7 +174,7 @@ public class FileManager extends Reader {
             System.out.println("Please Enter the File Name or File Path");
             this.fileName = this.getUserInput();
         }
-        this.writer = new FileWriter(this.fileName);
+        this.writer = new BufferedWriter(new FileWriter(this.fileName));
     }
 
     /**

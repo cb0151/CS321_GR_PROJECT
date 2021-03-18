@@ -51,7 +51,7 @@ public class DemoSetup {
         FileManager.setStringArrayList(ingredientDictionary.convertToStringArrayList());
 
         try {
-            FileManager.generateJSONFile("Ingredients");
+            FileManager.generateJSONFile(FileType.INGREDIENTS);
         } catch (IOException e) {
             e.printStackTrace();
         }
