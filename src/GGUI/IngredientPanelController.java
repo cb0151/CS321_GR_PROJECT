@@ -15,7 +15,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class IngrediantPanelController extends JPanel implements ActionListener {
+public class IngredientPanelController extends JPanel implements ActionListener {
 
     private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
@@ -36,7 +36,7 @@ public class IngrediantPanelController extends JPanel implements ActionListener 
      */
     //ArrayList<IngredientItem> IL;
 
-    public IngrediantPanelController(){
+    public IngredientPanelController(){
 
         tablePane = new JScrollPane();
 

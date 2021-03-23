@@ -10,14 +10,14 @@ public class DefaultFrame extends JFrame {
    private JTabbedPane ingredientsTab;
 
     /**
-     *  Builds the frame adds the tabs. At the moment IngrediantPanelController is the only operational frame.
+     *  Builds the frame adds the tabs. At the moment IngredientPanelController is the only operational frame.
      */
     public DefaultFrame()
     {
         tabbedPane = new JTabbedPane();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         recepPanel = new JPanel();
-        tabbedPane.add("Ingredients", new IngrediantPanelController());
+        tabbedPane.add("Ingredients", new IngredientPanelController());
         tabbedPane.add("Recipes", recepPanel);
         tabbedPane.add("Form", formPanel);
         setResizable(false);
