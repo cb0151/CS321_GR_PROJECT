@@ -118,6 +118,15 @@ public class IngredientItem implements Cloneable{
     }
 
     /**
+     * Method to fill the Current Table Setup
+     * TODO check to see if the data for the tables can be populated differently
+     * @return
+     */
+    public String[] toQOHString() {
+        return new String[]{this.name , this.weight + " " + this.measurementUnit, String.valueOf(this.cost)};
+    }
+
+    /**
      * Method to Clone the Ingredient Item
      * @return
      * @throws CloneNotSupportedException

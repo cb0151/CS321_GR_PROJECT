@@ -2,7 +2,6 @@ package com.company;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 
 public class InventoryManager {
@@ -37,7 +36,7 @@ public class InventoryManager {
         }
         FileManager.createObjectArray();
         IngredientFactory.startFactory(FileManager.getObjectArrayList());
-        IngredientDictionary = new IngredientDictionary(IngredientFactory.getList());
+        //IngredientDictionary = new IngredientDictionary(IngredientFactory.getList());
 
         try {
             FileManager.close();
@@ -181,20 +180,7 @@ public class InventoryManager {
         //Unit calculation comes here
         return quantity*searchIngredient(ingredient).getCost();
     }
-/**
- * This returns the current cost of all items in the inventory.
- * @return A double which represents the current cost of all items in the inventory
- * */
-    public double curInventoryCost(){
-        return IngredientDictionary.inventoryCost();
-    }
-    /**
-     * This returns the difference between the initial cost of all items and the current cost.
-     * @return A double which represents the cost difference.
-     * */
-    public double costDifference(){
-        return initialInventorycost - curInventoryCost();
-    }
+
 
     /**
      * Method will Retrieve a copy of the Ingredient Item Needed
@@ -212,7 +198,7 @@ public class InventoryManager {
      * @return  Boolean Value based on result
      */
     public boolean doesIngredientExist(IngredientItem ingredient){
-        return IngredientDictionary.ingredientCheck(ingredient);
+        return IngredientDictionary.searchForIngredient(ingredient);
     }
 
     //Need???

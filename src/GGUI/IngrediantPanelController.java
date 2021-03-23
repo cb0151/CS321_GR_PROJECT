@@ -15,7 +15,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class IngrediantPanel extends JPanel implements ActionListener {
+public class IngrediantPanelController extends JPanel implements ActionListener {
 
     private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
@@ -30,8 +30,13 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
     private DefaultTableModel DTM;
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
-    ArrayList<IngredientItem> IL;
-    public IngrediantPanel(){
+    /*
+        Removed this because it defeats the purpose of the Singleton Class
+        By doing so, allows for this class to be Refactored to be considered the Controller Class.
+     */
+    //ArrayList<IngredientItem> IL;
+
+    public IngrediantPanelController(){
 
         tablePane = new JScrollPane();
 
@@ -48,24 +53,31 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     }
     private void buildIngredientTable(){
 
-        IL=ID.getIngredientItemArrayList();
+        //IL=ID.getIngredientItemArrayList();
         String[][] data;
-        int n = IL.size();
+        int n = ID.getSize();
         data = new String[n][2];
-        String[] header = new String[] {"ingredient", "Amount on hand"};
+        String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
 
 
 
         ingredientTable = new JTable();
         DTM = (DefaultTableModel) ingredientTable.getModel();
         ingredientTable.setRowSelectionAllowed(true);
-        DTM.addColumn("Ingredient");
-        DTM.addColumn("Amount on hand");
-        String[] rowData;
+        //DTM.addColumn("Ingredient");
+        //DTM.addColumn("Amount on hand");
+        DTM.addColumn(header[0]);
+        DTM.addColumn(header[1]);
+        DTM.addColumn(header[2]);
+        //String[] rowData; //Removed the need for this. Please change back if I missed a reason, Cody
         for(int r = 0; r < n; r++) {
-            rowData = new String[]{IL.get(r).getName(), String.valueOf(IL.get(r).getWeight()) + " " + IL.get(r).getMeasurementUnit()};
-            DTM.addRow(rowData);
+            //rowData = new String[]{IL.get(r).getName(), String.valueOf(IL.get(r).getWeight()) + " " + IL.get(r).getMeasurementUnit()};
+            //DTM.addRow(rowData);
 
+            /*Changed Code to Not Create the Singleton and then Just pass all the data
+                This can modified later to pass back different datatype if necessary
+            */
+            DTM.addRow(ID.printDictionary(r));
 
         }
 
@@ -173,20 +185,20 @@ public class IngrediantPanel extends JPanel implements ActionListener {
 
             new AddDialog(this);
 
-            System.out.println("Add");
+            System.out.println("Ingredient Add");
         }
         else if(e.getSource() == ingreUpdateB)
         {
-            System.out.println("Update");
+            System.out.println("Ingredient Update");
 
         }
         else if(e.getSource() == ingreRemoveB)
         {
-            System.out.println("Remove");
+            System.out.println("Ingredient Remove");
         }
         else if(e.getSource() == ingreListAllB){
 
-            System.out.println("list all");
+            System.out.println("Listing All");
 
         }
     }
