@@ -34,7 +34,7 @@ public class IngredientPanelController extends JPanel implements ActionListener 
         Removed this because it defeats the purpose of the Singleton Class
         By doing so, allows for this class to be Refactored to be considered the Controller Class.
      */
-    //ArrayList<IngredientItem> IL;
+    ArrayList<IngredientItem> IL;
 
     public IngredientPanelController(){
 
@@ -44,6 +44,11 @@ public class IngredientPanelController extends JPanel implements ActionListener 
         buildIngredientTable();
 
     }
+
+    public DefaultTableModel getDTM() {
+        return DTM;
+    }
+
     private void filter(String search)
     {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(DTM);
@@ -62,22 +67,20 @@ public class IngredientPanelController extends JPanel implements ActionListener 
 
 
         ingredientTable = new JTable();
+
         DTM = (DefaultTableModel) ingredientTable.getModel();
         ingredientTable.setRowSelectionAllowed(true);
-        //DTM.addColumn("Ingredient");
-        //DTM.addColumn("Amount on hand");
         DTM.addColumn(header[0]);
         DTM.addColumn(header[1]);
         DTM.addColumn(header[2]);
-        //String[] rowData; //Removed the need for this. Please change back if I missed a reason, Cody
-        for(int r = 0; r < n; r++) {
-            //rowData = new String[]{IL.get(r).getName(), String.valueOf(IL.get(r).getWeight()) + " " + IL.get(r).getMeasurementUnit()};
-            //DTM.addRow(rowData);
 
-            /*Changed Code to Not Create the Singleton and then Just pass all the data
-                This can modified later to pass back different datatype if necessary
-            */
+
+
+
+        for(int r = 0; r < n; r++) {
+
             DTM.addRow(ID.printDictionary(r));
+
 
         }
 
@@ -139,15 +142,15 @@ public class IngredientPanelController extends JPanel implements ActionListener 
     //The following code builds toolbar;
         {
             ingreSearchTF.setColumns(12);
-        add(ingreSearchTF);
+            add(ingreSearchTF);
 
 
-        ingreToolBar.add(ingreSearchB);
-        ingreToolBar.add(ingreAddB);
-        ingreToolBar.add(ingreUpdateB);
-        ingreToolBar.add(ingreRemoveB);
-        ingreToolBar.addSeparator();
-        ingreToolBar.add(ingreListAllB);
+            ingreToolBar.add(ingreSearchB);
+            ingreToolBar.add(ingreAddB);
+            ingreToolBar.add(ingreUpdateB);
+            ingreToolBar.add(ingreRemoveB);
+            ingreToolBar.addSeparator();
+            ingreToolBar.add(ingreListAllB);
          }
 
     // The following code adds the listener to the  Buttons.
@@ -183,13 +186,20 @@ public class IngredientPanelController extends JPanel implements ActionListener 
         else if(e.getSource() == ingreAddB)
         {
 
-            new AddDialog(this);
+            AddDialog addDialog = new AddDialog(this);
+            //TODO How are we going to update the default table model
 
-            System.out.println("Ingredient Add");
+
         }
         else if(e.getSource() == ingreUpdateB)
         {
-            System.out.println("Ingredient Update");
+            int selectRow = ingredientTable.getSelectedRow();
+
+            //TODO make sure we create an if-else statement that makes sure the user selected an item!
+            String name = (String) ingredientTable.getValueAt(selectRow, 0);
+            IngredientItem ingredientItem= ID.getIngredientItem(name);
+            System.out.println("Update " + name + " with Amount: "+ ingredientItem.getWeight() + " "+ingredientItem.getMeasurementUnit());
+
 
         }
         else if(e.getSource() == ingreRemoveB)

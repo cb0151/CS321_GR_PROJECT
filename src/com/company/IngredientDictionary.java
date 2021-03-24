@@ -328,4 +328,33 @@ public class IngredientDictionary {
     public double costDifference(){
         return this.initialCost - curInventoryCost();
     }
+
+    /**
+     * This function takes in a string of the ingredient name and returns it's index.
+     *
+     *
+     * @param ingredientItem String of the
+     * @return
+     */
+
+    public int searchForIngredientIndex(String ingredientItem){
+        int index = -1;
+        ingredientItem = ingredientItem.toUpperCase();
+        try{
+            for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
+                if(this.ingredientItemArrayList.get(i).getName().equals(ingredientItem)){
+
+                    index = i;
+                    break;
+                }
+            }
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        //TODO add exception Handling here
+        //if(isIngredient == false) System.out.println(ingredientItem.getName() + " :: Error Not Found");
+
+        return index;
+    }
 }

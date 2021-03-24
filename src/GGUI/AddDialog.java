@@ -1,8 +1,10 @@
 package GGUI;
 
 import com.company.IngredientDictionary;
+import com.company.IngredientItem;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,12 +20,14 @@ private ArrayList<SelfClearingTextField> listTextFields;
  private IngredientDictionary ID;
  private String getUnit;
  private String[] unitArray = new String[4];
+ private IngredientPanelController ingredientPanelController;
+ private DefaultTableModel DTM;
 
 
 
 /*
 TODO:
-    Jonathon and Nathan,
+    Jonathan and Nathan,
     Suggest editing to not call the Ingredient Dictionary Instance again. What this will do is not add to the main
         ingredient dictionary and cause issues.
             My Suggestion:: Make this Add Dialog Pop Out Window take in the Information from the user and then set
@@ -55,8 +59,11 @@ TODO:
 
                                     Cody
 */
-    public  AddDialog(JPanel panel){
+
+    public  AddDialog(IngredientPanelController panel){
         setTitle("Add Item");
+        ingredientPanelController = panel;
+        DTM = ingredientPanelController.getDTM();
         ID = IngredientDictionary.getIngredientDictionary();
         setLayout(new GridBagLayout());
         JDialog j = new JDialog();
@@ -64,9 +71,30 @@ TODO:
         buildDialog();
         setSize(300,300);
         pack();
-        //setResizable(true);
+
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    /**
+     * Finds the insertion point.
+     * @param name
+     * @return
+     */
+    private int findInsertionPoint(String name)
+    {
+        DTM = ingredientPanelController.getDTM();
+        int index = DTM.getRowCount();
+        for(int i = 0; i < DTM.getRowCount(); i++)
+        {
+         if(name.compareTo((String)DTM.getValueAt(i, 0)) < 0) {
+             index = i;
+             break;
+         }
+
+        }
+
+        return index;
     }
     private void buildDialog()
     {
@@ -144,7 +172,7 @@ TODO:
     }
 
     /**
-     * This method resets all the blank/nonclicked-on text field to default message.
+     * This method resets all the blank/nonclicked-on text field to default in the textfields.
      * I might need to move this to an utility method so other frames can use this.
      */
     private void resetList(){
@@ -184,6 +212,20 @@ TODO:
 
 
                         System.out.println(itemStr + " has been added.");
+                        int row = findInsertionPoint(itemStr);
+                        Object newRow [] = {itemStr, amtPurchasedValue + " " +getUnit, priceValue};
+                        DTM.insertRow(row, newRow);
+                        //*****************************************************************************************
+                        // TODO insert add ingredient code here for backend work.
+                        // this is just temporary code for testing purposes!
+                        IngredientItem item = new IngredientItem();
+                        item.setName(itemStr);
+                        item.setCost(priceValue);
+                        item.setMeasurementUnit(getUnit);
+                        item.setQuantityOnHand(amtPurchasedValue);
+                        ID.addIngredientToList(item);
+
+                        //******************************************************************************************
                         dispose();
                     } else {
                         System.out.println(itemStr + " was not added.");
